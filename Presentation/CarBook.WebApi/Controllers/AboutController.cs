@@ -52,14 +52,14 @@ namespace CarBook.WebApi.Controllers
         public async Task<IActionResult> UpdateAbout(UpdateAboutCommand command)
         {
             await _updateAboutCommandHandler.Handler(command);
-            return Ok();
+            return Ok("Hakkında bilgisi güncellendi.");
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteAbout(RemoveAboutCommand command)
         {
             await _removeAboutCommandHandler.Handlar(command);
-            return Ok();
+            return Ok("Hakkında bilgisi silindi.");
         }
 
 
