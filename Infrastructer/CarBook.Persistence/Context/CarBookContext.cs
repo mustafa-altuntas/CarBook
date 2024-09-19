@@ -15,7 +15,7 @@ namespace CarBook.Persistence.Context
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=CarBookDB;User ID=sa;Password=Password1;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
-        public DbSet<Aboud> Abouds { get; set; }
+        public DbSet<About> Abouds { get; set; }
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
