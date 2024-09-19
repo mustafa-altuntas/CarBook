@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBook.Persistence.Migrations
 {
     [DbContext(typeof(CarBookContext))]
-    [Migration("20240918091418_mig_first")]
-    partial class mig_first
+    [Migration("20240919075840_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,13 @@ namespace CarBook.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CarBook.Domain.Aboud", b =>
+            modelBuilder.Entity("CarBook.Domain.About", b =>
                 {
-                    b.Property<int>("AboudId")
+                    b.Property<int>("AboutId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboudId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboutId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -45,9 +45,9 @@ namespace CarBook.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AboudId");
+                    b.HasKey("AboutId");
 
-                    b.ToTable("Abouds");
+                    b.ToTable("Abouts");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Banner", b =>

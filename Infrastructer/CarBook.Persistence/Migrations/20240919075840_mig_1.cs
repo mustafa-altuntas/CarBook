@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarBook.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_first : Migration
+    public partial class mig_1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Abouds",
+                name: "Abouts",
                 columns: table => new
                 {
-                    AboudId = table.Column<int>(type: "int", nullable: false)
+                    AboutId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -23,7 +23,7 @@ namespace CarBook.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Abouds", x => x.AboudId);
+                    table.PrimaryKey("PK_Abouts", x => x.AboutId);
                 });
 
             migrationBuilder.CreateTable(
@@ -322,7 +322,7 @@ namespace CarBook.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Abouds");
+                name: "Abouts");
 
             migrationBuilder.DropTable(
                 name: "Banners");

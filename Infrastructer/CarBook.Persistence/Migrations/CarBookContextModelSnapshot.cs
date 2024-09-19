@@ -22,13 +22,13 @@ namespace CarBook.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CarBook.Domain.Aboud", b =>
+            modelBuilder.Entity("CarBook.Domain.About", b =>
                 {
-                    b.Property<int>("AboudId")
+                    b.Property<int>("AboutId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboudId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboutId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -42,9 +42,9 @@ namespace CarBook.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AboudId");
+                    b.HasKey("AboutId");
 
-                    b.ToTable("Abouds");
+                    b.ToTable("Abouts");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Banner", b =>
