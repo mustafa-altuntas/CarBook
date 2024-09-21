@@ -2,6 +2,8 @@ using CarBook.Aplication.Features.CQRS.Handlers.AboutHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.BannerHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.BrandHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.CarHandlers;
+using CarBook.Aplication.Features.CQRS.Handlers.CategoryHandlers;
+using CarBook.Aplication.Features.CQRS.Handlers.ContactHandlers;
 using CarBook.Aplication.Interfaces;
 using CarBook.Aplication.Interfaces.CarInterfaces;
 using CarBook.Persistence.Context;
@@ -43,6 +45,21 @@ builder.Services.AddScoped<GetCarQueryHandler>();
 builder.Services.AddScoped<RemoveCarCommandHandler>();
 builder.Services.AddScoped<UpdateCarCommandHandler>();
 builder.Services.AddScoped<GetCarWithBrandQueryHandler>();
+
+
+builder.Services.AddScoped<CreateCategoryCommandHandler>();
+builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
+builder.Services.AddScoped<GetCategoryQueryHandler>();
+builder.Services.AddScoped<RemoveCategoryCommandHandler>();
+builder.Services.AddScoped<UpdateCategoryCommandHandler>();
+
+
+builder.Services.AddScoped<CreateContactCommandHandler>();
+builder.Services.AddScoped<GetContactByIdQueryHandler>();
+builder.Services.AddScoped<GetContactQueryHandler>();
+builder.Services.AddScoped<RemoveContactCommandHandler>();
+builder.Services.AddScoped<UpdateContactCommandHandler>();
+
 
 
 
