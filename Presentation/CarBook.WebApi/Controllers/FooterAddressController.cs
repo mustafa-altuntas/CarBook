@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using CarBook.Aplication.Features.Mediator.Queries.FeatureQueries;
-using CarBook.Aplication.Features.Mediator.Commands.FeatureCommands;
+using CarBook.Aplication.Features.Mediator.Queries.FooterAddressQueries;
+using CarBook.Aplication.Features.Mediator.Commands.FooterAddressCommands;
 
 namespace CarBook.WebApi.Controllers
 {
@@ -20,38 +20,38 @@ namespace CarBook.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> FooterAddressList()
         {
-            var values = await _mediator.Send(new GetFeatureQuery());
+            var values = await _mediator.Send(new GetFooterAddressQuery());
             return Ok(values);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFooterAddress(int id)
         {
-            var value = await _mediator.Send(new GetFeatureByIdQuery(id));
+            var value = await _mediator.Send(new GetFooterAddressByIdQuery(id));
             return Ok(value);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateFooterAddress(CreateFeatureCommand command)
+        public async Task<IActionResult> CreateFooterAddress(CreateFooterAddressCommand command)
         {
             await _mediator.Send(command);
-            return Ok("Özellik bilgisi eklendi.");
+            return Ok("Footer Address bilgisi eklendi.");
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateFooterAddress(UpdateFeatureCommand command)
+        public async Task<IActionResult> UpdateFooterAddress(UpdateFooterAddressCommand command)
         {
             await _mediator.Send(command);
 
-            return Ok("Özellik bilgisi güncellendi.");
+            return Ok("Footer Address bilgisi güncellendi.");
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteFooterAddress(RemoveFeatureCommand command)
+        public async Task<IActionResult> DeleteFooterAddress(RemoveFooterAddressCommand command)
         {
             await _mediator.Send(command);
-
-            return Ok("Özellik bilgisi silindi.");
+             
+            return Ok("Footer Address bilgisi silindi.");
         }
 
 
