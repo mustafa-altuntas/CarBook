@@ -4,7 +4,7 @@ using CarBook.Aplication.Features.CQRS.Queries.CategoryQueries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CategoryBook.WebApi.Controllers
+namespace CarBook.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

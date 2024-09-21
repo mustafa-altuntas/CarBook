@@ -1,0 +1,59 @@
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using CarBook.Aplication.Features.Mediator.Queries.FeatureQueries;
+using CarBook.Aplication.Features.Mediator.Commands.FeatureCommands;
+
+namespace CarBook.WebApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class FooterAddressController : ControllerBase
+    {
+
+        private readonly IMediator _mediator;
+
+        public FooterAddressController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FooterAddressList()
+        {
+            var values = await _mediator.Send(new GetFeatureQuery());
+            return Ok(values);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetFooterAddress(int id)
+        {
+            var value = await _mediator.Send(new GetFeatureByIdQuery(id));
+            return Ok(value);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateFooterAddress(CreateFeatureCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok("Özellik bilgisi eklendi.");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateFooterAddress(UpdateFeatureCommand command)
+        {
+            await _mediator.Send(command);
+
+            return Ok("Özellik bilgisi güncellendi.");
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteFooterAddress(RemoveFeatureCommand command)
+        {
+            await _mediator.Send(command);
+
+            return Ok("Özellik bilgisi silindi.");
+        }
+
+
+    }
+}

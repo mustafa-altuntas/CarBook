@@ -1,10 +1,9 @@
 ﻿using CarBook.Aplication.Features.CQRS.Commands.ContactCommands;
 using CarBook.Aplication.Features.CQRS.Handlers.ContactHandlers;
 using CarBook.Aplication.Features.CQRS.Queries.ContactQueries;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ContactBook.WebApi.Controllers
+namespace CarBook.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
