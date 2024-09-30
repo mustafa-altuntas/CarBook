@@ -17,8 +17,9 @@ namespace CarBook.WebApi.Controllers
         private readonly RemoveCarCommandHandler _removeCarCommandHandler;
         private readonly UpdateCarCommandHandler _updateCarCommandHandler;
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
+        private readonly GetLast5CarsWhithBrandsQueryHandler _getLast5CarsWhithBrandsQueryHandler;
 
-        public CarController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, RemoveCarCommandHandler removeCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler)
+        public CarController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, RemoveCarCommandHandler removeCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWhithBrandsQueryHandler getLast5CarsWhithBrandsQueryHandler)
         {
             _createCarCommandHandler = createCarCommandHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -26,6 +27,7 @@ namespace CarBook.WebApi.Controllers
             _removeCarCommandHandler = removeCarCommandHandler;
             _updateCarCommandHandler = updateCarCommandHandler;
             _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
+            _getLast5CarsWhithBrandsQueryHandler = getLast5CarsWhithBrandsQueryHandler;
         }
 
 
@@ -75,6 +77,14 @@ namespace CarBook.WebApi.Controllers
         public IActionResult CarListWithBrand()
         {
             var values = _getCarWithBrandQueryHandler.Handler();
+            return Ok(values);
+        }
+
+
+        [HttpGet("GetLast5CarsWhithBrands")]
+        public IActionResult GetLast5CarsWhithBrands()
+        {
+            var values = _getLast5CarsWhithBrandsQueryHandler.Handler();
             return Ok(values);
         }
 
