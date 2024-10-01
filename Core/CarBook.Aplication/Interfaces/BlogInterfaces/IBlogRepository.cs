@@ -10,5 +10,6 @@ namespace CarBook.Aplication.Interfaces.BlogInterfaces
     public interface IBlogRepository
     {
         public List<Blog> GetLast3BlogsWhitAuthors();
+        public List<Blog> GetAllBlogsWithAuthors();
     }
 }
