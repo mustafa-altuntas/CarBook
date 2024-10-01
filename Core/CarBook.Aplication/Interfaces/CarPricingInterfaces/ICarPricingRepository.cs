@@ -9,7 +9,7 @@ namespace CarBook.Aplication.Interfaces.CarPricingInterfaces
 {
     public interface ICarPricingRepository
     {
-        public List<CarPricing> GetAllCarWhitPricings();
+        public List<CarPricing> GetAllCarPricingsWithCars();
 
     }
 }
