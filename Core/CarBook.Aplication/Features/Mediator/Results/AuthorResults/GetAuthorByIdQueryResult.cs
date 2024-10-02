@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarBook.Aplication.Features.Mediator.Results.AuthorResults
 {
-    public class GetAuthorByIdQueryResult
+    public class GetTagCloudByIdQueryResult
     {
         public int AuthorID { get; set; }
         public string Name { get; set; }

@@ -1,22 +1,20 @@
-﻿using CarBook.Domain;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Aplication.Features.Mediator.Commands.BlogCommands
+namespace Carbook.DTO.BlogDtos
 {
-    public class UpdateBlogCommand:IRequest
+    public class GetBlogByIdDto
     {
         public int BlogID { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-
         public int AuthorID { get; set; }
         public string CoverImageUrl { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CategoryID { get; set; }
+        public string Description { get; set; }
+
     }
 }

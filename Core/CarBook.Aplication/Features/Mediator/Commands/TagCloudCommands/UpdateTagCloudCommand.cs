@@ -1,16 +1,16 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Domain
+namespace CarBook.Aplication.Features.Mediator.Commands.TagCloudCommands
 {
-    public class TagCloud
+    public class UpdateTagCloudCommand:IRequest
     {
         public int TagCloudID { get; set; }
         public string Title { get; set; }
         public int BlogID { get; set; }
-        public Blog Blog{ get; set; }
     }
 }

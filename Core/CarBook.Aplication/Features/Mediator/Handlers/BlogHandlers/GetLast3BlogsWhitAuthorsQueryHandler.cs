@@ -25,7 +25,7 @@ namespace CarBook.Aplication.Features.Mediator.Handlers.BlogHandlers
         {
             var values = _repository.GetLast3BlogsWhitAuthors();
 
-            return  values.Select(a => new GetLast3BlogsWhitAuthorsQueryResult
+            return values.Select(a => new GetLast3BlogsWhitAuthorsQueryResult
             {
 
                 BlogID = a.BlogID,
@@ -33,6 +33,7 @@ namespace CarBook.Aplication.Features.Mediator.Handlers.BlogHandlers
                 CategoryID = a.CategoryID,
                 CoverImageUrl = a.CoverImageUrl,
                 Title = a.Title,
+                Description = a.Description,
                 CreatedDate = a.CreatedDate,
                 AuthorName = a.Author.Name,
 

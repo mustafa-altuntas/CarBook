@@ -27,6 +27,7 @@ namespace CarBook.Aplication.Features.Mediator.Handlers.BlogHandlers
             value.CategoryID = request.CategoryID;
             value.CoverImageUrl = request.CoverImageUrl;
             value.Title = request.Title;
+            value.Description = request.Description;
             value.CreatedDate = request.CreatedDate;
 
 

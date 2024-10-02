@@ -25,11 +25,12 @@ namespace CarBook.Aplication.Features.Mediator.Handlers.BlogHandlers
             var values = await _repository.GetAllAsync();
             return values.Select(a => new GetBlogQueryResult
             {
-                BlogID=a.BlogID,
+                BlogID = a.BlogID,
                 AuthorID = a.AuthorID,
                 CategoryID = a.CategoryID,
                 CoverImageUrl = a.CoverImageUrl,
                 Title = a.Title,
+                Description = a.Description,
                 CreatedDate = a.CreatedDate
             }).ToList();
         }
