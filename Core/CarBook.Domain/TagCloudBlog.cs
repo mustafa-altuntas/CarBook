@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace CarBook.Domain
 {
-    public class TagCloud
+    public class TagCloudBlog
     {
+        public int TagCloudBlogID { get; set; }
         public int TagCloudID { get; set; }
-        public string Title { get; set; }
-        public List<TagCloudBlog> TagCloudBlogs { get; set; }
+        public TagCloud TagCloud { get; set; }
+        public int BlogID { get; set; }
+        public Blog Blog { get; set; }
+
     }
 }

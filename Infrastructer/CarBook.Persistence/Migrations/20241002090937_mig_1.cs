@@ -27,6 +27,21 @@ namespace CarBook.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Authors",
+                columns: table => new
+                {
+                    AuthorID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authors", x => x.AuthorID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Banners",
                 columns: table => new
                 {
@@ -171,6 +186,19 @@ namespace CarBook.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TagClouds",
+                columns: table => new
+                {
+                    TagCloudID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TagClouds", x => x.TagCloudID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Testimonials",
                 columns: table => new
                 {
@@ -210,6 +238,36 @@ namespace CarBook.Persistence.Migrations
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "BrandId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    BlogID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AuthorID = table.Column<int>(type: "int", nullable: false),
+                    CoverImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.BlogID);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Authors_AuthorID",
+                        column: x => x.AuthorID,
+                        principalTable: "Authors",
+                        principalColumn: "AuthorID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Categories_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -287,6 +345,42 @@ namespace CarBook.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TagCloudBlogs",
+                columns: table => new
+                {
+                    TagCloudBlogID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TagCloudID = table.Column<int>(type: "int", nullable: false),
+                    BlogID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TagCloudBlogs", x => x.TagCloudBlogID);
+                    table.ForeignKey(
+                        name: "FK_TagCloudBlogs_Blogs_BlogID",
+                        column: x => x.BlogID,
+                        principalTable: "Blogs",
+                        principalColumn: "BlogID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TagCloudBlogs_TagClouds_TagCloudID",
+                        column: x => x.TagCloudID,
+                        principalTable: "TagClouds",
+                        principalColumn: "TagCloudID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_AuthorID",
+                table: "Blogs",
+                column: "AuthorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_CategoryID",
+                table: "Blogs",
+                column: "CategoryID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_CarDescriptions_CarId",
                 table: "CarDescriptions",
@@ -316,6 +410,16 @@ namespace CarBook.Persistence.Migrations
                 name: "IX_Cars_BrandId",
                 table: "Cars",
                 column: "BrandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TagCloudBlogs_BlogID",
+                table: "TagCloudBlogs",
+                column: "BlogID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TagCloudBlogs_TagCloudID",
+                table: "TagCloudBlogs",
+                column: "TagCloudID");
         }
 
         /// <inheritdoc />
@@ -337,9 +441,6 @@ namespace CarBook.Persistence.Migrations
                 name: "CarPricings");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Contacts");
 
             migrationBuilder.DropTable(
@@ -355,6 +456,9 @@ namespace CarBook.Persistence.Migrations
                 name: "SocialMedias");
 
             migrationBuilder.DropTable(
+                name: "TagCloudBlogs");
+
+            migrationBuilder.DropTable(
                 name: "Testimonials");
 
             migrationBuilder.DropTable(
@@ -367,7 +471,19 @@ namespace CarBook.Persistence.Migrations
                 name: "Pricings");
 
             migrationBuilder.DropTable(
+                name: "Blogs");
+
+            migrationBuilder.DropTable(
+                name: "TagClouds");
+
+            migrationBuilder.DropTable(
                 name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "Authors");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

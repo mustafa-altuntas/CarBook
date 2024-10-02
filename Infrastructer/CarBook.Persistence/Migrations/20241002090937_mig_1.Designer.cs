@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBook.Persistence.Migrations
 {
     [DbContext(typeof(CarBookContext))]
-    [Migration("20241001141758_mig_add_blog_add_Description_prop")]
-    partial class mig_add_blog_add_Description_prop
+    [Migration("20241002090937_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -459,6 +459,46 @@ namespace CarBook.Persistence.Migrations
                     b.ToTable("SocialMedias");
                 });
 
+            modelBuilder.Entity("CarBook.Domain.TagCloud", b =>
+                {
+                    b.Property<int>("TagCloudID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagCloudID"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TagCloudID");
+
+                    b.ToTable("TagClouds");
+                });
+
+            modelBuilder.Entity("CarBook.Domain.TagCloudBlog", b =>
+                {
+                    b.Property<int>("TagCloudBlogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagCloudBlogID"));
+
+                    b.Property<int>("BlogID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagCloudID")
+                        .HasColumnType("int");
+
+                    b.HasKey("TagCloudBlogID");
+
+                    b.HasIndex("BlogID");
+
+                    b.HasIndex("TagCloudID");
+
+                    b.ToTable("TagCloudBlogs");
+                });
+
             modelBuilder.Entity("CarBook.Domain.Testimonial", b =>
                 {
                     b.Property<int>("TestimonialId")
@@ -567,9 +607,33 @@ namespace CarBook.Persistence.Migrations
                     b.Navigation("Pricing");
                 });
 
+            modelBuilder.Entity("CarBook.Domain.TagCloudBlog", b =>
+                {
+                    b.HasOne("CarBook.Domain.Blog", "Blog")
+                        .WithMany("TagCloudBlogs")
+                        .HasForeignKey("BlogID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarBook.Domain.TagCloud", "TagCloud")
+                        .WithMany("TagCloudBlogs")
+                        .HasForeignKey("TagCloudID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("TagCloud");
+                });
+
             modelBuilder.Entity("CarBook.Domain.Author", b =>
                 {
                     b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("CarBook.Domain.Blog", b =>
+                {
+                    b.Navigation("TagCloudBlogs");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Brand", b =>
@@ -599,6 +663,11 @@ namespace CarBook.Persistence.Migrations
             modelBuilder.Entity("CarBook.Domain.Pricing", b =>
                 {
                     b.Navigation("CarPricings");
+                });
+
+            modelBuilder.Entity("CarBook.Domain.TagCloud", b =>
+                {
+                    b.Navigation("TagCloudBlogs");
                 });
 #pragma warning restore 612, 618
         }

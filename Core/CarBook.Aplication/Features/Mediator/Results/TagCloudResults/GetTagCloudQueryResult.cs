@@ -11,6 +11,5 @@ namespace CarBook.Aplication.Features.Mediator.Results.TagCloudResults
     {
         public int TagCloudID { get; set; }
         public string Title { get; set; }
-        public int BlogID { get; set; }
     }
 }

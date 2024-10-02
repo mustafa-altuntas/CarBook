@@ -1,30 +1,22 @@
-﻿
+﻿@model List<GetByBlogIdTagCloudDto>
 
 
-
-
+@* Bloglara ait etiketler *@
+@* _BlogDetailCloudTagByBlogComponentParial *@
 
 
 
 
 <div class="tag-widget post-tag-container mb-5 mt-5">
     <div class="tagcloud">
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Life</a>
-        <a href="#" class="tag-cloud-link">Sport</a>
-        <a href="#" class="tag-cloud-link">Tech</a>
-        <a href="#" class="tag-cloud-link">Travel</a>
-        <a href="#" class="tag-cloud-link">Travel</a>
+
+
+        @foreach (var item in Model)
+        {
+            
+        <a href="#" class="tag-cloud-link">@item.TagTitle</a>
+        }
+
+
     </div>
 </div>

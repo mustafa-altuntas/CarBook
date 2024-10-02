@@ -24,7 +24,7 @@ namespace CarBook.Aplication.Features.Mediator.Handlers.TagCloudHandlers
             var value = new TagCloud
             {
                 Title = request.Title,
-                BlogID = request.BlogID,
+                
             };
 
             await _repository.CreateAsync(value);
