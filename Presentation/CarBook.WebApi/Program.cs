@@ -4,6 +4,7 @@ using CarBook.Aplication.Features.CQRS.Handlers.BrandHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.CarHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.CategoryHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.ContactHandlers;
+using CarBook.Aplication.Features.RepositoryPattern;
 using CarBook.Aplication.Interfaces;
 using CarBook.Aplication.Interfaces.BlogInterfaces;
 using CarBook.Aplication.Interfaces.CarInterfaces;
@@ -15,6 +16,7 @@ using CarBook.Persistence.Repositories;
 using CarBook.Persistence.Repositories.BlogRepositories;
 using CarBook.Persistence.Repositories.CarPricingRepositories;
 using CarBook.Persistence.Repositories.CarRepositories;
+using CarBook.Persistence.Repositories.CommentRepositories;
 using CarBook.Persistence.Repositories.TagCloudBlogRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +30,7 @@ builder.Services.AddScoped(typeof(ICarRepository), typeof(CarRepository));
 builder.Services.AddScoped(typeof(IBlogRepository), typeof(BlogRepository));
 builder.Services.AddScoped(typeof(ICarPricingRepository), typeof(CarPricingRepository));
 builder.Services.AddScoped(typeof(ITagCloudBlogRepository), typeof(TagCloudBlogRepository));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(CommentRepository<>));
 
 
 builder.Services.AddScoped<CreateAboutCommandHandler>();

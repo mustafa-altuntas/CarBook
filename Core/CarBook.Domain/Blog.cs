@@ -18,5 +18,6 @@ namespace CarBook.Domain
         public Category Category { get; set; }
         public string Description { get; set; }
         public List<TagCloudBlog> TagCloudBlogs { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }
