@@ -45,10 +45,10 @@ namespace CarBook.WebApi.Controllers
             return Ok("Özellik bilgisi güncellendi.");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteFeature(RemoveFeatureCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFeature(int id)
         {
-            await _mediator.Send(command);
+            await _mediator.Send(new RemoveFeatureCommand() { FeatureId=id});
 
             return Ok("Özellik bilgisi silindi.");
         }

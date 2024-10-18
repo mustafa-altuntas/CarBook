@@ -65,10 +65,10 @@ namespace CarBook.WebApi.Controllers
 
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteCar(RemoveCarCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCar(int id)
         {
-            await _removeCarCommandHandler.Handler(command);
+            await _removeCarCommandHandler.Handler(new RemoveCarCommand() { CarId=id});
             return Ok("Araç bilgisi silindi.");
 
         }
