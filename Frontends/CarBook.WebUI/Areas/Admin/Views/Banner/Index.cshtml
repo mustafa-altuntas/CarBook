@@ -1,0 +1,73 @@
+﻿
+
+@model List<ResultBannerDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+
+            <h4 class="card-title">Anasayfa Banner Alanı</h4>
+            <p class="card-subtitle mb-4">
+               Anasayfanın banner alanında bulunan bilgileri düzenliyebilirsiniz. Tema bütünlüğünün bozulmaması adına lütfen 1 adet giriş yapınız.<a href="#"></a>
+               NOT: Yakında birden fazla giriş yapılarak yalnızca bir kayıt aktif edilebilecek.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/Banner/Create" class="btn btn-outline-secondary waves-effect waves-light">
+                    Yeni Banner Oluştur
+                    </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>Açıklama</th>
+                            <th>Video Url</th>
+                            <th>Video Açıklama</th>
+
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+                            <th>Youtub da Aç</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td>@item.Title</td>
+                                <td>@item.Description</td>
+                                <td>@item.VideoUrl</td>
+                                <td>@item.VideoDescription</td>
+
+                                <td><a href="/Admin/Banner/Remove/@item.BannerId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/Banner/Update/@item.BannerId" class="btn btn-outline-success">Güncelle</a></td>
+                                <td><a href="/Admin/Banner/Update/@item.BannerId" class="btn btn-outline-dark">Youtub da Aç</a></td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- end card-body-->
+    </div>
+    <!-- end card -->
+
+</div>
+<!-- end col -->

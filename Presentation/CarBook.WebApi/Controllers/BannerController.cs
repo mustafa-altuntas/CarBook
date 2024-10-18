@@ -58,10 +58,10 @@ namespace CarBook.WebApi.Controllers
             return Ok("Afiş bilgisi güncellendi.");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteBanner(RemoveBannerCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBanner(int id)
         {
-            await _removeBannerCommandHandler.Handler(command);
+            await _removeBannerCommandHandler.Handler(new RemoveBannerCommand() { BannerId=id});
             return Ok("Afiş bilgisi silindi.");
         }
 

@@ -28,6 +28,7 @@ namespace CarBook.Aplication.Features.CQRS.Handlers.BannerHandlers
                 value.VideoUrl = command.VideoUrl;
                 value.Title = command.Title;
                 value.Description = command.Description;
+                value.VideoDescription = command.VideoDescription;
                 value.VideoUrl = command.VideoUrl;
 
                 await _repository.UpdateAsync(value);
