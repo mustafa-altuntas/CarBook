@@ -1,6 +1,4 @@
-﻿
-
-@model List<ResultBannerDto>
+﻿@model List<ResultBannerDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -12,17 +10,18 @@
     <div class="card">
         <div class="card-body">
 
-
             <h4 class="card-title">Anasayfa Banner Alanı</h4>
             <p class="card-subtitle mb-4">
-               Anasayfanın banner alanında bulunan bilgileri düzenliyebilirsiniz. Tema bütünlüğünün bozulmaması adına lütfen 1 adet giriş yapınız.<a href="#"></a>
-               NOT: Yakında birden fazla giriş yapılarak yalnızca bir kayıt aktif edilebilecek.
+                Anasayfanın banner alanında bulunan bilgileri düzenliyebilirsiniz. Tema bütünlüğünün bozulmaması adına lütfen 1 adet giriş yapınız.<a href="#"></a>
+                NOT: Yakında birden fazla giriş yapılarak yalnızca bir kayıt aktif edilebilecek.
             </p>
 
             <div class="button-examples mb-3">
                 <a href="/Admin/Banner/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
                     Yeni Banner Oluştur
-                    </a>
+
+                </a>
 
             </div>
             <div class="table-responsive">
@@ -59,15 +58,9 @@
                             </tr>
                         }
 
-
                     </tbody>
                 </table>
             </div>
-
         </div>
-        <!-- end card-body-->
     </div>
-    <!-- end card -->
-
 </div>
-<!-- end col -->

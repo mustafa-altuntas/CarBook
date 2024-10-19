@@ -1,17 +1,13 @@
-﻿@{
+﻿@model UpdateBannerDto
+@{
     ViewData["Title"] = "Update";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-@model UpdateBannerDto
-
-
 
 <div class="col-xl-12">
-
     <div class="card">
         <div class="card-body">
-
 
             <h4 class="card-title">Banner Bilgisi Güncelleme</h4>
             <p class="card-subtitle mb-4">Banner alanı veri güncellemesini aşağıdaki panelden yapınız... </p>
@@ -21,7 +17,6 @@
                 <div class="form-row">
 
                     <div class="col-md-8 mb-3">
-
 
                         <div class="form-group">
                             <label asp-for="Title">Başlık</label>
@@ -43,15 +38,14 @@
                             <input asp-for="VideoUrl" type="text" class="form-control" placeholder="VideoUrl giriniz" required="">
                         </div>
 
-
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary waves-effect waves-light">Banner Güncelle</button>
             </form>
 
-        </div> <!-- end card-body-->
-    </div> <!-- end card-->
+        </div> 
+    </div> 
 </div>
 
 
