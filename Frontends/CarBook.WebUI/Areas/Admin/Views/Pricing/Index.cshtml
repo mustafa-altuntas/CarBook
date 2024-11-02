@@ -1,0 +1,58 @@
+﻿@model List<ResultPricingDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Ödeme Türleri Listesi</h4>
+            <p class="card-subtitle mb-4">
+                Araçların günlük, kiralık, aylık veya benzeri kiralama opsiyonlarının yer aldığı sayfadır. Bu sayfa üzerinden yeni bir zaman periyodu eklenebilir, silinebilir veya güncellenebilir.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/Pricing/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
+                    Yeni Ödeme Periyodu Oluştur
+
+                </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Periyod Adı</th>
+
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td> @item.Name</td>
+
+                                <td><a href="/Admin/Pricing/Remove/@item.PricingId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/Pricing/Update/@item.PricingId" class="btn btn-outline-success">Güncelle</a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

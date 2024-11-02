@@ -1,5 +1,4 @@
-﻿using Carbook.DTO.BannerDtos;
-using Carbook.DTO.BannerDtos;
+﻿using Carbook.DTO.PricingDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -7,11 +6,12 @@ using System.Text;
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BannerController : Controller
+    public class PricingController : Controller
     {
+
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public BannerController(IHttpClientFactory httpClientFactory)
+        public PricingController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -20,11 +20,11 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         {
 
             var client = _httpClientFactory.CreateClient();
-            var resutlMessage = await client.GetAsync("https://localhost:7112/api/Banner");
+            var resutlMessage = await client.GetAsync("https://localhost:7112/api/Pricing");
             if (resutlMessage.IsSuccessStatusCode)
             {
                 var jsonData = await resutlMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultBannerDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultPricingDto>>(jsonData);
                 return View(values);
             }
 
@@ -39,25 +39,25 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateBannerDto createBannerDto)
+        public async Task<IActionResult> Create(CreatePricingDto createPricingDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createBannerDto);
+            var jsonData = JsonConvert.SerializeObject(createPricingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var resultMessage = await client.PostAsync("https://localhost:7112/api/Banner", stringContent);
+            var resultMessage = await client.PostAsync("https://localhost:7112/api/Pricing", stringContent);
             if (resultMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
                 //return RedirectToAction("Index", "Brand", new { area = "Admin" });
             }
 
-            return View(createBannerDto);
+            return View(createPricingDto);
         }
 
         public async Task<IActionResult> Remove(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/Banner/{id}");
+            var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/Pricing/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
@@ -70,13 +70,13 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var resultMessage = await client.GetAsync($"https://localhost:7112/api/Banner/{id}");
+            var resultMessage = await client.GetAsync($"https://localhost:7112/api/Pricing/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
                 var jsonData = await resultMessage.Content.ReadAsStringAsync();
-                var value = JsonConvert.DeserializeObject<UpdateBannerDto>(jsonData);
-                TempData["UpdateBannerId"] = value.BannerId;
-                value.BannerId = 0;
+                var value = JsonConvert.DeserializeObject<UpdatePricingDto>(jsonData);
+                TempData["UpdatePricingId"] = value.PricingId;
+                value.PricingId = 0;
                 return View(value);
             }
 
@@ -86,24 +86,21 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(UpdateBannerDto updateBannerDto)
+        public async Task<IActionResult> Update(UpdatePricingDto updatePricingDto)
         {
-            updateBannerDto.BannerId = (int)TempData["UpdateBannerId"];
+            updatePricingDto.PricingId = (int)TempData["UpdatePricingId"];
 
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateBannerDto);
+            var jsonData = JsonConvert.SerializeObject(updatePricingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var resultMessage = await client.PutAsync("https://localhost:7112/api/Banner", stringContent);
+            var resultMessage = await client.PutAsync("https://localhost:7112/api/Pricing", stringContent);
             if (resultMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(updateBannerDto);
+            return View(updatePricingDto);
 
         }
-
-
-
     }
 }

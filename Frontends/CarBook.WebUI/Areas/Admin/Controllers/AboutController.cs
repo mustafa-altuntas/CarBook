@@ -1,75 +1,112 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Carbook.DTO.AboutDtos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AboutController : Controller
     {
-        public ActionResult Index()
+
+
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public AboutController(IHttpClientFactory httpClientFactory)
         {
-            return View();
+            _httpClientFactory = httpClientFactory;
         }
 
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            var client = _httpClientFactory.CreateClient();
+            var resutlMessage = await client.GetAsync("https://localhost:7112/api/About");
+            if (resutlMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction(nameof(Index));
+                var jsonData = await resutlMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
+                return View(values);
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Create(CreateAboutDto createAboutDto)
         {
-            try
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createAboutDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var resultMessage = await client.PostAsync("https://localhost:7112/api/About", stringContent);
+            if (resultMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+                //return RedirectToAction("Index", "Brand", new { area = "Admin" });
+            }
+
+            return View(createAboutDto);
+        }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/About/{id}");
+            if (resultMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        public ActionResult Delete(int id)
-        {
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var resultMessage = await client.GetAsync($"https://localhost:7112/api/About/{id}");
+            if (resultMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await resultMessage.Content.ReadAsStringAsync();
+                var value = JsonConvert.DeserializeObject<UpdateAboutDto>(jsonData);
+                TempData["UpdateAboutId"] = value.AboutId;
+                value.AboutId = 0;
+                return View(value);
+            }
+
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Update(UpdateAboutDto updateAboutDto)
         {
-            try
+            updateAboutDto.AboutId = (int)TempData["UpdateAboutId"];
+
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(updateAboutDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var resultMessage = await client.PutAsync("https://localhost:7112/api/About", stringContent);
+            if (resultMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(updateAboutDto);
+
         }
+
+
+
+
     }
 }

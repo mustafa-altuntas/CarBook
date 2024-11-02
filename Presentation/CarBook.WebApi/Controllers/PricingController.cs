@@ -47,10 +47,10 @@ namespace CarBook.WebApi.Controllers
             return Ok("Ödeme bilgisi güncelendi.");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> RemovePricing(RemovePricingCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemovePricing(int id)
         {
-            await _mediator.Send(command);
+            await _mediator.Send(new RemovePricingCommand() { PricingId = id });
             return Ok("Ödeme bilgisi silindi.");
         }
 

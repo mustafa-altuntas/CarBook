@@ -1,0 +1,67 @@
+﻿@model List<ResultAllBlogsWithAuthorDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Blog Listesi</h4>
+            <p class="card-subtitle mb-4">
+                Bloglarla ilgili silme, güncelleme ve blog listesi erişimini görebilirsiniz. Yeni blog ekleme işlemi admin tarafından yapılmamaktadır. Eğer blog ekleme işlemi yapmak isterseniz sisteme yazar olarak giriş yapmanız gerekmektedir. Her yazar sadece kendi bloglarını düzenliye bilir.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/Blog/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
+                   Blog Ekleme Sayfadına Git
+
+                </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>Yazar</th>
+                            <th>Kategori</th>
+                            <th>Tarih</th>
+
+                            <th>Sil</th>
+                            <th>Blogu Sitede Aç</th>
+                            <th>Yorumlar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td> @item.Title</td>
+                                <td> @item.AuthorName</td>
+                                <td> @item.CategoryName</td>
+                                <td> @item.CreatedDate</td>
+
+                                <td><a href="/Admin/Blog/Remove/@item.BlogID" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Blog/BlogDetail/@item.BlogID" class="btn btn-outline-dark">Sitede Aç</a></td>
+                                <td><a href="/Admin/Comment/Index/@item.BlogID" class="btn btn-outline-warning">Yorumlar</a></td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

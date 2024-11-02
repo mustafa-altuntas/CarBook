@@ -20,7 +20,7 @@ namespace CarBook.Aplication.Features.CQRS.Handlers.AboutHandlers
 
         public async Task Handler(UpdateAboutCommand command)
         {
-            var about = await _repository.GetByIdAsync(command.AboudId);
+            var about = await _repository.GetByIdAsync(command.AboutId);
             about.Title = command.Title;
             about.Description = command.Description;
             about.ImageUrl = command.ImageUrl;

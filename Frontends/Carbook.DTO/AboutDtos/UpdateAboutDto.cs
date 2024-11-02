@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Aplication.Features.CQRS.Commands.AboutCommands
+namespace Carbook.DTO.AboutDtos
 {
-    public class UpdateAboutCommand
+    public class UpdateAboutDto
     {
+        
         public int AboutId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

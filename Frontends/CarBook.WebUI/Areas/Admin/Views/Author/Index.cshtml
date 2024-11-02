@@ -1,0 +1,61 @@
+﻿@model List<ResultAuthorDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Yazar Listesi</h4>
+            <p class="card-subtitle mb-4">
+                Yazarlar ile ilgili işlemlerin gerçekleştirileceği sayfadır. Yazar girişi yaparken bilgileri eksiksiz girmeye özen gösteriniz.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/Author/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
+                    Yeni Yazar Oluştur
+
+                </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ad Soyad</th>
+
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+                            <th>Yazarın Blogları</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td> <img src="@item.ImageUrl" alt="brand-logo" height="48" class="mr-2 rounded"> @item.Name</td>
+
+                                <td><a href="/Admin/Author/Remove/@item.AuthorID" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/Author/Update/@item.AuthorID" class="btn btn-outline-success">Güncelle</a></td>
+                                <td><a href="/Admin/Author/#/@item.AuthorID" class="btn btn-outline-dark">Yazarın Blogları</a></td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

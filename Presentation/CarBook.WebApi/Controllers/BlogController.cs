@@ -48,10 +48,10 @@ namespace CarBook.WebApi.Controllers
             return Ok("Blog bilgisi güncelendi.");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> RemoveSocialMedia(RemoveBlogCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveSocialMedia(int id)
         {
-            await _mediator.Send(command);
+            await _mediator.Send(new RemoveBlogCommand() { BlogID = id });
             return Ok("Blog bilgisi silindi.");
         }
 
@@ -61,7 +61,7 @@ namespace CarBook.WebApi.Controllers
             var values = await _mediator.Send(new GetLast3BlogsWhitAuthorsQuery());
             return Ok(values);
         }
-        
+
         [HttpGet("GetAllBlogsWithAuthorList")]
         public async Task<IActionResult> GetAllBlogsWithAuthorList()
         {
@@ -69,7 +69,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
-                
+
         [HttpGet("GetBlogByIdWithAuthor")]
         public async Task<IActionResult> GetBlogByIdWithAuthor(int id)
         {

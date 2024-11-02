@@ -1,0 +1,61 @@
+﻿@model List<ResultCategoryDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Blog Kategori Listesi</h4>
+            <p class="card-subtitle mb-4">
+                Blog Kategori ile ilgili işlemlerin gerçekleştirileceği sayfadır. Blog Kategori girişi yaparken bilgileri eksiksiz girmeye özen gösteriniz.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/Category/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
+                    Yeni Kategori Oluştur
+
+                </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Kategori Ad</th>
+
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+                            <th>Kategoriye Ait Bloglar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td> @item.Name</td>
+
+                                <td><a href="/Admin/Category/Remove/@item.CategoryId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/Category/Update/@item.CategoryId" class="btn btn-outline-success">Güncelle</a></td>
+                                <td><a href="/Admin/Category/#/@item.CategoryId" class="btn btn-outline-dark">Kategoriye Ait Bloglar</a></td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
