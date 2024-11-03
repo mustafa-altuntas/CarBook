@@ -48,10 +48,10 @@ namespace CarBook.WebApi.Controllers
             return Ok("Location bilgisi güncelendi.");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> RemoveLocation(RemoveLocationCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveLocation(int id)
         {
-            await _mediator.Send(command);
+            await _mediator.Send(new RemoveLocationCommand() { LocationId=id});
             return Ok("Location bilgisi silindi.");
         }
 

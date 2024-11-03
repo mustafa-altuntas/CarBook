@@ -5,7 +5,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 @await Html.PartialAsync("/Views/AdminLayout/AdminHeaderPartial.cshtml")
+
+@await RenderSectionAsync("HeaderCss", required: false)
 
 <body>
     <!-- Begin page -->
@@ -35,7 +38,11 @@
     </div>
     <!-- END layout-wrapper -->
     <!-- Overlay-->
+
+    
     @await Html.PartialAsync("/Views/AdminLayout/AdminScriptPartial.cshtml")
+
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

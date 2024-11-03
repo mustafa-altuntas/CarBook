@@ -46,11 +46,11 @@ namespace CarBook.WebApi.Controllers
             return Ok("Footer Address bilgisi güncellendi.");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteFooterAddress(RemoveFooterAddressCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFooterAddress(int id)
         {
-            await _mediator.Send(command);
-             
+            await _mediator.Send(new RemoveFooterAddressCommand() { FooterAddressId = id });
+
             return Ok("Footer Address bilgisi silindi.");
         }
 

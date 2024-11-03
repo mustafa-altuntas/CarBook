@@ -1,0 +1,64 @@
+﻿
+@model List<ResultFooterAddresDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">İletişim ve Footer Alani Adres Sayfasi</h4>
+            <p class="card-subtitle mb-4">
+                İletişim ve Footer kısımlarında yer alan adres bilgilerine ait islemleri bu sayfadan gergeklestirebilirsiniz. Harita bilgisini lokasyon degeri olarak Google Map üzerinden alabilirsiniz.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/FooterAddress/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
+                    Yeni Adress Oluştur
+
+                </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Adres</th>
+                            <th>Telefon</th>
+                            <th>E-Mail</th>
+                            <th>Açıklama</th>
+
+
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.Address</th>
+                                <th>@item.Phone</th>
+                                <th>@item.Email</th>
+                                <th>@item.Description</th>
+ 
+
+                                <td><a href="/Admin/FooterAddress/Remove/@item.FooterAddressId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/FooterAddress/Update/@item.FooterAddressId" class="btn btn-outline-success">Güncelle</a></td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
