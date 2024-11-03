@@ -1,6 +1,8 @@
 ﻿using CarBook.Aplication.Features.CQRS.Commands.CarCommands;
 using CarBook.Aplication.Features.CQRS.Handlers.CarHandlers;
 using CarBook.Aplication.Features.CQRS.Queries.CarQueries;
+using CarBook.Aplication.Features.Mediator.Queries.StatisticQueries;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +20,7 @@ namespace CarBook.WebApi.Controllers
         private readonly UpdateCarCommandHandler _updateCarCommandHandler;
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
         private readonly GetLast5CarsWhithBrandsQueryHandler _getLast5CarsWhithBrandsQueryHandler;
+
 
 
         public CarController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, RemoveCarCommandHandler removeCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWhithBrandsQueryHandler getLast5CarsWhithBrandsQueryHandler)
