@@ -47,10 +47,10 @@ namespace CarBook.WebApi.Controllers
             return Ok("Servis bilgisi güncelendi.");
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> RemoveService(RemoveServiceCommand command)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveService(int id)
         {
-            await _mediator.Send(command);
+            await _mediator.Send(new RemoveServiceCommand() { ServiceID = id });
             return Ok("Servis bilgisi silindi.");
         }
 
