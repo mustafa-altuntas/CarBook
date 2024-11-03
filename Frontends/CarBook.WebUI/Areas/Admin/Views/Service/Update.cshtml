@@ -1,10 +1,9 @@
-﻿@model UpdateLocationDto
+﻿@model UpdateServiceDto
 
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
-
 
 <div class="col-xl-12">
 
@@ -12,9 +11,9 @@
         <div class="card-body">
 
 
-            <h4 class="card-title">Lokasyon Bilgisi Güncelle</h4>
+            <h4 class="card-title">Hizmet Sayfası Veri Güncelle</h4>
             <p class="card-subtitle mb-4">
-                Araçların alındığı ver teslim edildiği noktalara ait lokasyon bilgisinin güncellendiği sayfadır. Bilgileri eksiksiz olarak doldurun.
+                Ana sayfa ve hizmetler bölümünde yer alan hizmet listesinin güncelleme işlemlerini aşağıdaki sayfadan gerçekleştirebilirsiniz.
             </p>
 
             <form method="post">
@@ -25,13 +24,19 @@
 
 
                         <div class="form-group">
-                            <label asp-for="Name">Lokasyon Adı</label>
-                            <input asp-for="Name" type="text" class="form-control" placeholder="Lokasyon adını giriniz" required="">
+                            <label asp-for="Title">Hizmet Başlığı</label>
+                            <input asp-for="Title" type="text" class="form-control" placeholder="Hizmet Başlığını Giriniz" required="">
                         </div>
 
- 
+                        <div class="form-group">
+                            <label asp-for="Description">Hizmet Açıklaması</label>
+                            <input asp-for="Description" type="text" class="form-control" placeholder="Hizmet Açıklamasını Giriniz" required="">
+                        </div>
 
-
+                        <div class="form-group">
+                            <label asp-for="IconUrl">Lokasyon Adı</label>
+                            <input asp-for="IconUrl" type="text" class="form-control" placeholder="Hizmet Ikon Bilgisini Giriniz" required="">
+                        </div>
 
                     </div>
 
@@ -43,6 +48,4 @@
         </div>
     </div>
 </div>
-
-
 
