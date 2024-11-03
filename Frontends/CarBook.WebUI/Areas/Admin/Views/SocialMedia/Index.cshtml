@@ -1,0 +1,64 @@
+﻿
+@model List<ResultSocialMediaDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Sosyal Medya Hesap Linkleri Yönetimi Sayfası</h4>
+            <p class="card-subtitle mb-4">
+                Kullandığınız sosyal medya hesaplarına ait bilgileri yönetebileceğiniz sayfadır.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/SocialMedia/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
+                    Yeni Sosyal Meda Oluştur
+
+                </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+        
+
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+                            <th>Aç</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                
+                                <th>@count</th>
+                                <td>@item.Name</td>
+
+                                <td><a href="/Admin/SocialMedia/Remove/@item.SocialMediaId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/SocialMedia/Update/@item.SocialMediaId" class="btn btn-outline-success">Güncelle</a></td>
+                                <td><a href="@item.Url" class="btn btn-outline-success">Aç</a></td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
