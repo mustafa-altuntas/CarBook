@@ -74,8 +74,8 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             {
                 var jsonData = await resultMessage.Content.ReadAsStringAsync();
                 var value = JsonConvert.DeserializeObject<UpdateSocialMediaDto>(jsonData);
-                TempData["UpdateSocialMediaId"] = value.SocialMediaID;
-                value.SocialMediaID = 0;
+                TempData["UpdateSocialMediaId"] = value.SocialMediaId;
+                value.SocialMediaId = 0;
                 return View(value);
             }
 
@@ -87,7 +87,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(UpdateSocialMediaDto updateSocialMediaDto)
         {
-            updateSocialMediaDto.SocialMediaID = (int)TempData["UpdateSocialMediaId"];
+            updateSocialMediaDto.SocialMediaId = (int)TempData["UpdateSocialMediaId"];
 
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateSocialMediaDto);
