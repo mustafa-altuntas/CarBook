@@ -1,0 +1,68 @@
+﻿
+@model List<ResultTestimonialDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Ana Sayfa Referanslar Listesi</h4>
+            <p class="card-subtitle mb-4">
+                Müşterilerimizin bizim hakkımızda söylemiş oldukları ifadeleri yorum olarak ekleyip, düzenleyebildiğimiz sayfamız aşağıda yer almaktadır.
+            </p>
+
+            <div class="button-examples mb-3">
+                <a href="/Admin/Testimonial/Create" class="btn btn-outline-secondary waves-effect waves-light">
+
+                    Yeni Referans Oluştur
+
+                </a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Fotoğraf</th>
+                            <th>Ad Soyad</th>
+                            <th>Başlık</th>
+                            <th>Yorum</th>
+        
+
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                
+                                <th>@count</th>
+                                <td><img src="@item.ImageUrl" alt="brand-logo" height="48" class=" rounded"></td>
+                                <td>@item.Name </td>
+                                <th>@item.Title</th>
+                                <th>@item.Comment</th>
+
+                                <td><a href="/Admin/Testimonial/Remove/@item.TestimonialId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/Testimonial/Update/@item.TestimonialId" class="btn btn-outline-success">Güncelle</a></td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
