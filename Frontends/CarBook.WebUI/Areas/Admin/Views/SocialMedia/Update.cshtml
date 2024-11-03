@@ -1,9 +1,10 @@
-﻿@model UpdateServiceDto
+﻿@model UpdateSocialMediaDto
 
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
+
 
 <div class="col-xl-12">
 
@@ -11,9 +12,9 @@
         <div class="card-body">
 
 
-            <h4 class="card-title">Hizmet Sayfası Veri Güncelle</h4>
+            <h4 class="card-title">Sosyal Medya Sayfası Veri Güncelleme</h4>
             <p class="card-subtitle mb-4">
-                Ana sayfa ve hizmetler bölümünde yer alan hizmet listesinin güncelleme işlemlerini aşağıdaki sayfadan gerçekleştirebilirsiniz.
+                Sosyal medya hesaplarınıza ait veri düzenlemelerini buradan yapabilirsiniz. İkonlarla ilgili listeye ikon listesi üzerinden ulaşabilirsiniz.
             </p>
 
             <form method="post">
@@ -24,18 +25,18 @@
 
 
                         <div class="form-group">
-                            <label asp-for="Title">Hizmet Başlığı</label>
-                            <input asp-for="Title" type="text" class="form-control" placeholder="Hizmet Başlığını Giriniz" required="">
+                            <label asp-for="Name">Sosyal Medya Başlığı</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="Sosyal Medya Başlığını Giriniz" required="">
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="Description">Hizmet Açıklaması</label>
-                            <input asp-for="Description" type="text" class="form-control" placeholder="Hizmet Açıklamasını Giriniz" required="">
+                            <label asp-for="Url">URL</label>
+                            <input asp-for="Url" type="text" class="form-control" placeholder="Sosyal Medya Sayfanızın URL Linkini Giriniz" required="">
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="IconUrl">Lokasyon Adı</label>
-                            <input asp-for="IconUrl" type="text" class="form-control" placeholder="Hizmet Ikon Bilgisini Giriniz" required="">
+                            <label asp-for="Icon">Sosyal Medya İkon</label>
+                            <input asp-for="Icon" type="text" class="form-control" placeholder="Sosyal Medya Ikon Bilgisini Giriniz" required="">
                         </div>
 
                     </div>
