@@ -16,6 +16,13 @@ namespace CarBook.WebApi.Controllers
             this.mediator = mediator;
         }
 
+        [HttpGet("GetAllStatistics")]
+        public async Task<IActionResult> GetAllStatistics()
+        {
+            var value = await mediator.Send(new GetAllStatisticsQuery());
+            return Ok(value);
+        }
+
         [HttpGet("GetCarCount")]
         public async Task<IActionResult> GetCarCount()
         {
@@ -23,14 +30,12 @@ namespace CarBook.WebApi.Controllers
             return Ok(value);
         }
 
-
         [HttpGet("GetLocationCount")]
         public async Task<IActionResult> GetLocationCount()
         {
             var value = await mediator.Send(new GetLocationCountQuery());
             return Ok(value);
         }
-
 
         [HttpGet("GetAuthorCount")]
         public async Task<IActionResult> GetAuthorCount()
