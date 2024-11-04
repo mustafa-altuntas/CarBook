@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarBook.WebUI", "Frontends\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carbook.DTO", "Frontends\Carbook.DTO\Carbook.DTO.csproj", "{EBA11869-A3BF-47A3-9FCC-9C51292500F8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Y-Deneme", "Y-Deneme", "{DDBC5A8E-8418-4632-AA36-EFE4280D5F40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

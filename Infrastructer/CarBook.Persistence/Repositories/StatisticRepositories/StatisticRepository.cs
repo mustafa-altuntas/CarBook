@@ -39,7 +39,7 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
                 .OrderByDescending(x => x.Count)
                 .FirstOrDefault();
             return value!.Result;
-                
+
         }
 
         public int GetAuthorCount()
@@ -50,21 +50,29 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
         public double GetAvgRentPriceForDaily()
         {
             //var value = _context.CarPricings.Where(cp=>cp.PricingId==1).Average(cp=>cp.Amount);
-            var value = _context.CarPricings.Include(cp => cp.Pricing).ThenInclude(cp => cp.Name == "Günlük")
+            var value = _context.CarPricings
+                .Include(cp => cp.Pricing)
+                .Where(cp => cp.Pricing.Name == "Günlük")
                 .Average(cp => cp.Amount);
             return value;
         }
 
         public double GetAvgRentPriceForMonthly()
         {
-            var value = _context.CarPricings.Include(cp => cp.Pricing).ThenInclude(cp => cp.Name == "Aylık")
+
+            var value = _context.CarPricings
+                .Include(cp => cp.Pricing)
+                .Where(cp => cp.Pricing.Name == "Aylık")
                 .Average(cp => cp.Amount);
             return value;
         }
 
         public double GetAvgRentPriceForWeekly()
         {
-            var value = _context.CarPricings.Include(cp => cp.Pricing).ThenInclude(cp => cp.Name == "Haftalık")
+
+            var value = _context.CarPricings
+                .Include(cp => cp.Pricing)
+                .Where(cp => cp.Pricing.Name == "Haftalık")
                 .Average(cp => cp.Amount);
             return value;
         }
