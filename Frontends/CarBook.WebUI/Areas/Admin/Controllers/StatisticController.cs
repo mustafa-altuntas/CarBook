@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Carbook.DTO.StatisticDtos;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace CarBook.WebUI.Areas.Admin.Controllers
@@ -21,11 +22,11 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         {
 
             var client = _httpClientFactory.CreateClient();
-            var resultMessage = await client.GetAsync($"www");
+            var resultMessage = await client.GetAsync($"https://localhost:7112/api/Statistic/GetAllStatistics");
             if(resultMessage.IsSuccessStatusCode)
             {
                 var jsonData = await resultMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<int>(jsonData);
+                var values = JsonConvert.DeserializeObject<ResultAllStatisticDto>(jsonData);
                 return View(values);
             }
 
