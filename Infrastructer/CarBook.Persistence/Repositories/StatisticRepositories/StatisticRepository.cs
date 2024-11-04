@@ -18,7 +18,7 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
             _context = context;
         }
 
-        public string BlogTitleByMaxBlogComment()
+        public string GetBlogTitleByMaxBlogComment()
         {
 
             /*
@@ -168,7 +168,7 @@ namespace CarBook.Persistence.Repositories.StatisticRepositories
             return _context.Cars.Where(c => c.Fuel == "Benzin" || c.Fuel == "Dizel").Count();
         }
 
-        public int GetCarCountBySmallerThen1000()
+        public int GetCarCountByKmSmallerThen1000()
         {
             return _context.Cars.Where(car => car.Km <= 1000).Count();
         }

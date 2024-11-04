@@ -25,9 +25,9 @@ namespace CarBook.Aplication.Interfaces.StatisticInterfaces
         /// <returns> En fazla araca sahip markayı döner. </returns>
         string GetBrandNameByMaxCar();
         /// <returns> En fazla yorum alan blog başlığını döner. </returns>
-        string BlogTitleByMaxBlogComment();
+        string GetBlogTitleByMaxBlogComment();
         /// <returns> 1000 KM den düşük araçların sayısını döner. </returns>
-        int GetCarCountBySmallerThen1000();
+        int GetCarCountByKmSmallerThen1000();
         /// <returns> Benzinli veya Dizel araç sayısını döner. </returns>
         int GetCarCountByFuelGasolineOrDiesel();
         /// <returns> Elektirikli araç sayısını döner. </returns>
@@ -37,10 +37,7 @@ namespace CarBook.Aplication.Interfaces.StatisticInterfaces
         /// <returns> Günlük kiralama bedeli en ucuz aracın marka ve modelini döner </returns>
         string GetCarBrandAndModelByRentPriceDailyMin();
         /// <returns>  </returns>
-        
-        /// <returns>  </returns>
-        /// <returns>  </returns>
-        /// <returns>  </returns>
+
 
 
     }
