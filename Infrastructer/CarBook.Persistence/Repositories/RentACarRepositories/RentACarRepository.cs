@@ -1,6 +1,7 @@
 ﻿using CarBook.Aplication.Interfaces.RentACarInterfaces;
 using CarBook.Domain;
 using CarBook.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,9 @@ namespace CarBook.Persistence.Repositories.RentACarRepositories
     public class RentACarRepository : IRentACarRepository
     {
         private readonly CarBookContext _context;
-
-        public RentACarRepository(CarBookContext context)
+        public async Task<List<RentACar>> GetByFilterAsync(Expression<Func<RentACar, bool>> filterExpression)
         {
-            _context = context;
-        }
-
-        public Task<List<RentACar>> GetByFilterAsync(Expression<Func<RentACar, bool>> filterExpression)
-        {
-            _context.
+            return await _context.RentACars.Where(filterExpression).ToListAsync();
         }
     }
 }
