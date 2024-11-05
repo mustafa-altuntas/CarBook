@@ -22,7 +22,7 @@ namespace CarBook.Persistence.Repositories.RentACarRepositories
 
         public async Task<List<RentACar>> GetByFilterAsync(Expression<Func<RentACar, bool>> filterExpression)
         {
-            return await _context.RentACars.Where(filterExpression).ToListAsync();
+            return await _context.RentACars.Include(rc=>rc.Location).Where(filterExpression).ToListAsync();
         }
     }
 }

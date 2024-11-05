@@ -10,7 +10,8 @@ namespace CarBook.Aplication.Features.Mediator.Queries.RentACarQueries
 {
     public class GetRentACarQuery:IRequest<List<GetRentACarQueryResult>>
     {
-        public int LocationId { get; set; }
+        //public int LocationId { get; set; }
+        public string Location { get; set; }
         public bool Available { get; set; }
     }
 }
