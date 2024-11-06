@@ -17,13 +17,7 @@ namespace CarBook.Persistence.Context
             //optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=CarBookDB;User ID=sa;Password=Password1;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
 
-            modelBuilder.Entity<Location>().HasIndex(e => e.Name).IsUnique();
-
-            base.OnModelCreating(modelBuilder);
-        }
 
         public DbSet<About> Abouts { get; set; }
         public DbSet<Banner> Banners { get; set; }
@@ -49,7 +43,32 @@ namespace CarBook.Persistence.Context
         public DbSet<RentACar> RentACars { get; set; }
         public DbSet<RentACarProcess> RentACarProcesses { get; set; }
         public DbSet<Customer> Customers { get; set; }
-     
+        public DbSet<Reservation> Reservations { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Location>().HasIndex(e => e.Name).IsUnique();
+
+            modelBuilder.Entity<Reservation>()
+                .HasOne(r=>r.PickUpLocation)
+                .WithMany(l=>l.PickUpReservations)
+                .HasForeignKey(r=>r.PickUpLocationId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Reservation>()
+                .HasOne(r => r.DropOffLocation)
+                .WithMany(l => l.DropOffReservations)
+                .HasForeignKey(r => r.DropOffLocationId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+
+            base.OnModelCreating(modelBuilder);
+        }
+
 
     }
 }
