@@ -1,14 +1,61 @@
-﻿@{
+﻿@model (List<FilterRentACarDto>,ResultRentACarFilterDto)
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
 
-<h1>Index</h1>
-@* <h1>@Model.PickUpDate</h1>
-<h1>@Model.PickUpTime</h1>
-<h1>@Model.PickUpLocationId</h1>
-<h1>@Model.DropOffDate</h1>
-<h1>@Model.DropOffTime</h1>
-<h1>@Model.DropOffLocationId</h1>
+<section class="ftco-section bg-light">
+    <div class="container">
 
- *@
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate fadeInUp ftco-animated">
+                <h2 class="mb-3">@Model.Item2.PickUpLocation</h2>
+                <span class="subheading"> PickUpDate: @Model.Item2.PickUpDate</span>
+                <span class="subheading"> PickUpTime: @Model.Item2.PickUpTime</span>
+                <span class="subheading"> DropOffDate: @Model.Item2.DropOffDate</span>
+                <span class="subheading"> DropOffTime: @Model.Item2.DropOffTime</span>
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            @foreach (var item in Model.Item1)
+            {
+                <div class="col-md-4">
+                    <div class="car-wrap rounded ftco-animate">
+                        <div class="img rounded d-flex align-items-end" style="background-image: url(@item.CoverImageUrl);">
+                        </div>
+                        <div class="text">
+                            <h2 class="mb-0"><a href="car-single.html">@item.Model</a></h2>
+                            <div class="d-flex mb-3">
+                                <span class="cat">@item.Brand</span>
+                                <p class="price ml-auto">@item.Amount <span>/Gün</span></p>
+                            </div>
+                            <p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Hemen Kirala</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        <li><a href="#">&lt;</a></li>
+                        <li class="active"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
