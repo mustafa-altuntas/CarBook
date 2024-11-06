@@ -31,7 +31,7 @@ namespace CarBook.WebUI.Controllers
                 var jsonData = await resultMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
 
-                List<SelectListItem> selectListItems = values.Select(l => new SelectListItem { Text = l.Name, Value = l.Name }).ToList();
+                List<SelectListItem> selectListItems = values.Select(l => new SelectListItem { Text = l.Name, Value = l.LocationId.ToString() }).ToList();
                 ViewBag.LocationSelectList = selectListItems;
 
                 return View();
@@ -49,9 +49,10 @@ namespace CarBook.WebUI.Controllers
             var resultMessage = await client.PostAsync("https://localhost:7112/api/Reservation", stringContent);
             if (resultMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction(nameof(Index),nameof(DefaultController));
+                return RedirectToAction(nameof(Index),"Default");
                 //return RedirectToAction("Index", "Brand", new { area = "Admin" });
             }
+            var v = resultMessage.RequestMessage;
 
             return View(dto);
         }
