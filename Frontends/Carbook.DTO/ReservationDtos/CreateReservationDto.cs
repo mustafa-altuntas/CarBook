@@ -8,7 +8,6 @@ namespace Carbook.DTO.ReservationDtos
 {
     public class CreateReservationDto
     {
-        public int ReservationId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }

@@ -22,6 +22,7 @@ namespace CarBook.Domain
 
         public Location PickUpLocation { get; set; }
         public Location DropOffLocation { get; set; }
+        public Car Car { get; set; }
 
     }
 }
