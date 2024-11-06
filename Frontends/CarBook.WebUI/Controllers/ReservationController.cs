@@ -22,6 +22,7 @@ namespace CarBook.WebUI.Controllers
         {
             ViewBag.v1 = "Araç Kiralama";
             ViewBag.v2 = "Araç Rezervasyon Formu";
+            ViewBag.v3 = id;
 
             var client = _httpClientFactory.CreateClient();
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/Location");
