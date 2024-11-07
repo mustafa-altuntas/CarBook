@@ -32,7 +32,9 @@ namespace CarBook.Aplication.Features.Mediator.Handlers.ReservationHandlers
                 CarId = request.CarId,
                 Age = request.Age,
                 DriverLicenseYear = request.DriverLicenseYear,
-                Description = request.Description
+                Description = request.Description,
+                Status="Rezervasyon Alındı"
+                
             };
 
             await _repository.CreateAsync(value);
