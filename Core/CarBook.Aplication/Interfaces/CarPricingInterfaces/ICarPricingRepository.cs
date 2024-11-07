@@ -1,4 +1,5 @@
-﻿using CarBook.Domain;
+﻿using CarBook.Aplication.ViewModels;
+using CarBook.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace CarBook.Aplication.Interfaces.CarPricingInterfaces
     public interface ICarPricingRepository
     {
         public List<CarPricing> GetAllCarPricingsWithCars();
-        public List<CarPricing> GetCarPricingWithTimePeriod();
+        public List<CarPricingWithTimePeriodViewModel> GetCarPricingWithTimePeriod();
 
     }
 }
