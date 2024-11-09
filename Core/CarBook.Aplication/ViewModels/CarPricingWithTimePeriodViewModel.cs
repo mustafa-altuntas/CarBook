@@ -10,6 +10,7 @@ namespace CarBook.Aplication.ViewModels
     {
         public int CarId { get; set; }
         public string Brand { get; set; }
+        public string CoverImageUrl { get; set; }
         public string Model { get; set; }
         public double Daily { get; set; }
         public double Weekly { get; set; }

@@ -31,12 +31,13 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
                         .Include(cp => cp.Car) // Car navigasyon özelliği
                             .ThenInclude(c => c.Brand) // Marka bilgisine erişim
                         .Include(cp => cp.Pricing) // Pricing bilgisine erişim
-                        .GroupBy(cp => new { cp.CarId, cp.Car.Brand.Name, cp.Car.Model }) // Gruba göre gruplama
+                        .GroupBy(cp => new { cp.CarId, cp.Car.Brand.Name, cp.Car.Model,cp.Car.CoverImageUrl }) // Gruba göre gruplama
                         .Select(g => new
                         {
                             CarId = g.Key.CarId,
                             Brand = g.Key.Name,
                             Model = g.Key.Model,
+                            CoverImageUrl = g.Key.CoverImageUrl,
                             Daily = g.Where(cp => cp.PricingId == 1).Max(cp => cp.Amount),
                             Weekly = g.Where(cp => cp.PricingId == 2).Max(cp => cp.Amount),
                             Monthly = g.Where(cp => cp.PricingId == 3).Max(cp => cp.Amount)
@@ -46,7 +47,8 @@ namespace CarBook.Persistence.Repositories.CarPricingRepositories
             return result.Select(c=> new CarPricingWithTimePeriodViewModel
             {
                 CarId=c.CarId,
-                Brand=c.Brand,
+                Brand = c.Brand,
+                CoverImageUrl=c.CoverImageUrl,
                 Model = c.Model,
                 Daily=c.Daily,
                 Monthly=c.Monthly,

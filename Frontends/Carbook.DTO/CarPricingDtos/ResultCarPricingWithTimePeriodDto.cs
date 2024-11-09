@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Aplication.Features.Mediator.Results.CarPricingResults
+namespace Carbook.DTO.CarPricingDtos
 {
-    public class GerCarPricingWithTimePeriodQueryResult
+    public class ResultCarPricingWithTimePeriodDto
     {
         public string Model { get; set; }
         public string Brand { get; set; }
@@ -14,5 +14,6 @@ namespace CarBook.Aplication.Features.Mediator.Results.CarPricingResults
         public double DailyAmount { get; set; }
         public double WeeklyAmount { get; set; }
         public double MonthlAmount { get; set; }
+
     }
 }
