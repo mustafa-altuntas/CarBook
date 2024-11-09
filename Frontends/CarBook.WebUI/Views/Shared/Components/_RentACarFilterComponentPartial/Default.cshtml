@@ -3,6 +3,11 @@
     var locations = (List<SelectListItem>)ViewBag.SelectLocationList!;
 }
 
+<style>
+    #drop option{
+        color:black;
+    }
+</style>
 
 
 <section class="ftco-section ftco-no-pt bg-light">
@@ -16,7 +21,7 @@
 
                             <div class="form-group">
                                 <label for="" class="label">Alış Yeri</label>
-                                <select asp-for="PickUpLocation" asp-items="@locations" class="custom-select">
+                                <select asp-for="PickUpLocation" asp-items="@locations" id="drop" class="form-control">
                                 </select>
                             </div>
 
@@ -84,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><a href="#" class="btn btn-primary py-3 px-4">Mükemmel Aracınızı Rezerve Edin</a></p>
+                            <p><a href="/CarPricing/Index" class="btn btn-primary py-3 px-4">Mükemmel Aracınızı Rezerve Edin</a></p>
                         </div>
                     </div>
                 </div>
