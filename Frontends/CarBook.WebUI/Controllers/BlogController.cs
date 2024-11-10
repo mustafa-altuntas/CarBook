@@ -31,7 +31,6 @@ namespace CarBook.WebUI.Controllers
             return View();
         }
 
-
         public async Task<IActionResult> BlogDetail(int id)
         {
 
@@ -39,13 +38,20 @@ namespace CarBook.WebUI.Controllers
             ViewBag.v2 = "Blog Detayı ve yorumlar";
             ViewBag.BlogId = id;
 
-
             return View();
-
-
-
         }
 
+        [HttpGet]
+        public PartialViewResult AddCommet()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public IActionResult AddCommet(int id)
+        {
+            return View();
+        }
 
 
 
