@@ -16,6 +16,15 @@ namespace CarBook.WebUI.ViewComponents.BlogViewComponents
         public async Task<IViewComponentResult> InvokeAsync(int id)
         {
             var client = _httpClientFactory.CreateClient();
+
+
+            var responseMessage1 = await client.GetAsync($"https://localhost:7112/api/Comment/GetCountCommentByBlog?id={id}");
+            if (responseMessage1.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage1.Content.ReadAsStringAsync();
+                ViewBag.CommendCount = JsonConvert.DeserializeObject<int>(jsonData);
+            }
+
             var responseMessage = await client.GetAsync($"https://localhost:7112/api/Blog/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -23,6 +32,9 @@ namespace CarBook.WebUI.ViewComponents.BlogViewComponents
                 var value = JsonConvert.DeserializeObject<GetBlogByIdDto>(jsonData);
                 return View(value);
             }
+
+
+
 
             return View();
         }
