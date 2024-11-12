@@ -1,25 +1,26 @@
-﻿
-
-
+﻿@model CreateCommentDto
+@{
+    var bl = ViewBag.BId;
+}
 
 
 <div class="comment-form-wrap pt-5">
     <h3 class="mb-5">Bir Yorum Yapın</h3>
 
-    <form method="post" class="p-5 bg-light">
+    <form method="post" asp-controller="Blog" asp-action="AddCommet" class="p-5 bg-light">
+            <input asp-for="BlogID" value="@bl" hidden type="text" class="form-control">
+
         <div class="form-group">
-            <label for="name">Adınız Soyadınız *</label>
-            <input type="text" class="form-control" id="name">
-        </div>
-        <div class="form-group">
-            <label for="email">Mail Adresiniz *</label>
-            <input type="email" class="form-control" id="email">
+            <label asp-for="Name">Adınız Soyadınız *</label>
+            <input asp-for="Name" type="text" class="form-control">
         </div>
 
         <div class="form-group">
-            <label for="message">Yorumunuz</label>
-            <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+            <label asp-for="Description">Yorumunuz</label>
+            <textarea asp-for="Description" cols="30" rows="10" class="form-control"></textarea>
         </div>
+
+
         <div class="form-group">
             <input type="submit" value="Yorum Yap" class="btn py-3 px-4 btn-primary">
         </div>

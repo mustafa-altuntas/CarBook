@@ -44,7 +44,7 @@ namespace CarBook.WebUI.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult AddCommet()
+        public async Task<PartialViewResult> AddCommet()
         {
             return PartialView();
         }
@@ -52,6 +52,7 @@ namespace CarBook.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCommet(CreateCommentDto request)
         {
+            request.CreatedDate = DateTime.Now;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(request);
             StringContent stringContent = new StringContent(jsonData,Encoding.UTF8,"application/json");

@@ -21,7 +21,7 @@
 
 
 
-        @await Html.PartialAsync("~/Views/Blog/AddCommet.cshtml")
+        @await Html.PartialAsync("~/Views/Blog/AddCommet.cshtml",null, new ViewDataDictionary(ViewData) { { "BId", ViewBag.BlogId } })
         @* @await Component.InvokeAsync("_AddCommentComponentPartial") *@
     </div>
 
