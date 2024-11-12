@@ -159,6 +159,13 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
         }
 
+        [HttpGet("Detail/{id}")]
+        public async Task<IActionResult> Detail(int id)
+        {
+
+            return View();
+        }
+
 
 
     }
