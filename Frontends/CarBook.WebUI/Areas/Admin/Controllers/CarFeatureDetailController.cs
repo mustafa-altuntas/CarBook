@@ -39,37 +39,19 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
             foreach (var item in dtos)
             {
-                if (item.Available)
+                string url = item.Available
+                    ? $"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToTrue/{item.CarFeatureId}"
+                    : $"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToFalse/{item.CarFeatureId}";
+                var resultMessage = await client.GetAsync(url);
+                if (!resultMessage.IsSuccessStatusCode)
                 {
-                    var resultMessage1 = await client.GetAsync($"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToTrue/{item.CarFeatureId}");
-                    if (!resultMessage1.IsSuccessStatusCode)
-                    {
-                        TempData["ErrorMessage"] = "Bir hata oluştu!";
-                        return RedirectToAction("Index", new { carId = carId });
-                    }
-                }
-                else
-                {
-                    var resultMessage2 = await client.GetAsync($"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToFalse/{item.CarFeatureId}");
-                    if (!resultMessage2.IsSuccessStatusCode)
-                    {
-                        TempData["ErrorMessage"] = "Bir hata oluştu!";
-                        return RedirectToAction("Index", new { carId = carId });
-                    }
+                    TempData["ErrorMessage"] = "Bir hata oluştu!";
+                    return RedirectToAction("Index", new { carId = carId });
                 }
             }
 
-            //var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarFeature/{carId}");
-            //if (resultMessage.IsSuccessStatusCode)
-            //{
-            //    var jsonData = await resultMessage.Content.ReadAsStringAsync();
-            //    var values = JsonConvert.DeserializeObject<List<ResultCarFeatureByCarIdDto>>(jsonData);
-            //    return View(values);
-            //}
-
             TempData["SuccessMessage"] = "İşlem başarıyla tamamlandı!";
             return RedirectToAction("Index", new { carId = carId });
-            //return View();
         }
 
     }
