@@ -36,6 +36,7 @@ namespace CarBook.Persistence.Repositories.CarFeatureRepositories
         public void CreateCarFeatureByCar(CarFeature carFeature)
         {
             _context.CarFeatures.Add(carFeature);
+            _context.SaveChanges();
         }
 
         public List<CarFeature> GetCarFeatureByCarId(int carId)

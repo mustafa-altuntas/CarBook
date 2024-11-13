@@ -1,4 +1,5 @@
 ﻿using CarBook.Aplication.Features.Mediator.Commands.CarFeatureCommands;
+using CarBook.Aplication.Features.Mediator.Handlers.CarFeatureHandlers;
 using CarBook.Aplication.Features.Mediator.Queries.CarFeatureQueries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,13 @@ namespace CarBook.WebApi.Controllers
         {
             await _mediator.Send(new UpdateCarFeatureAvailableChangeToTrueCommand(id));
             return Ok("Güncelleme yapıldı.");
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> CreateCarFeatureByCar(CreateCarFeatureByCarCommend commend)
+        {
+            await _mediator.Send(commend);
+            return Ok("Kayıt yapıldı.");
         }
 
     }
