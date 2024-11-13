@@ -2,6 +2,42 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+
+    var successMessage = TempData["SuccessMessage"];
+    var errorMessage = TempData["ErrorMessage"];
+}
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@if (successMessage != null)
+{
+    <script>
+        swal({
+            icon: "success",
+            text: `@Html.Raw(successMessage)`,
+            buttons: {
+                catch: {
+                    text: "Araç Listesine Dön",
+                    value: "Cars",
+                },
+                defeat: "Kapat",
+            },
+        }).then((value) => {
+            switch (value) {
+                case "Cars":
+                    window.location = `@Url.Action("Index", "Car", new { area = "Admin" })`;
+                    break;
+            }
+        });
+    </script>
+}
+
+@if (errorMessage != null)
+{
+    <script>
+        swal("Hata!", `@Html.Raw(errorMessage)`, "error");
+    </script>
 }
 
 
@@ -16,8 +52,7 @@
                 Araca ait özellik eklemesi yapabilir, mevcut özellikleri kaldırabilir, ilgili güncellemeleri gerçeklestirebilirsiniz.
             </p>
 
-            
-            <form  method="post">
+            <form method="post">
 
                 @Html.AntiForgeryToken()
 
@@ -38,7 +73,6 @@
                 <button class="btn btn-success mt-5">Kaydet</button>
 
             </form>
-
 
         </div>
     </div>

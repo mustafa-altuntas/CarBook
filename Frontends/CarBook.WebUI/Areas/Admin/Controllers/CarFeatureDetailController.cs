@@ -22,7 +22,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
             var client = _httpClientFactory.CreateClient();
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarFeature/{carId}");
-            if(resultMessage.IsSuccessStatusCode)
+            if (resultMessage.IsSuccessStatusCode)
             {
                 var jsonData = await resultMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultCarFeatureByCarIdDto>>(jsonData);
@@ -33,7 +33,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost("{carId}")]
-        public async Task<IActionResult> Index(List<ResultCarFeatureByCarIdDto> dtos,int carId)
+        public async Task<IActionResult> Index(List<ResultCarFeatureByCarIdDto> dtos, int carId)
         {
             var client = _httpClientFactory.CreateClient();
 
@@ -42,24 +42,34 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
                 if (item.Available)
                 {
                     var resultMessage1 = await client.GetAsync($"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToTrue/{item.CarFeatureId}");
+                    if (!resultMessage1.IsSuccessStatusCode)
+                    {
+                        TempData["ErrorMessage"] = "Bir hata oluştu!";
+                        return RedirectToAction("Index", new { carId = carId });
+                    }
                 }
                 else
                 {
                     var resultMessage2 = await client.GetAsync($"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToFalse/{item.CarFeatureId}");
-
+                    if (!resultMessage2.IsSuccessStatusCode)
+                    {
+                        TempData["ErrorMessage"] = "Bir hata oluştu!";
+                        return RedirectToAction("Index", new { carId = carId });
+                    }
                 }
             }
 
-            var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarFeature/{carId}");
-            if (resultMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await resultMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCarFeatureByCarIdDto>>(jsonData);
-                return View(values);
-            }
+            //var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarFeature/{carId}");
+            //if (resultMessage.IsSuccessStatusCode)
+            //{
+            //    var jsonData = await resultMessage.Content.ReadAsStringAsync();
+            //    var values = JsonConvert.DeserializeObject<List<ResultCarFeatureByCarIdDto>>(jsonData);
+            //    return View(values);
+            //}
 
-
-            return View();
+            TempData["SuccessMessage"] = "İşlem başarıyla tamamlandı!";
+            return RedirectToAction("Index", new { carId = carId });
+            //return View();
         }
 
     }
