@@ -15,7 +15,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpGet("{carId}")]
+        [HttpGet("Index/{carId}")]
         public async Task<IActionResult> Index(int carId)
         {
             ViewBag.Id = carId;
@@ -31,5 +31,14 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
             return View();
         }
+
+        [HttpPost("Index")]
+        public IActionResult Index(List<ResultCarFeatureByCarIdDto> dto)
+        {
+
+
+            return View();
+        }
+
     }
 }
