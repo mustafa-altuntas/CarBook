@@ -15,7 +15,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        [HttpGet("Index/{carId}")]
+        [HttpGet("{carId}")]
         public async Task<IActionResult> Index(int carId)
         {
             ViewBag.Id = carId;
@@ -32,9 +32,31 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpPost("Index")]
-        public IActionResult Index(List<ResultCarFeatureByCarIdDto> dto)
+        [HttpPost("{carId}")]
+        public async Task<IActionResult> Index(List<ResultCarFeatureByCarIdDto> dtos,int carId)
         {
+            var client = _httpClientFactory.CreateClient();
+
+            foreach (var item in dtos)
+            {
+                if (item.Available)
+                {
+                    var resultMessage1 = await client.GetAsync($"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToTrue/{item.CarFeatureId}");
+                }
+                else
+                {
+                    var resultMessage2 = await client.GetAsync($"https://localhost:7112/api/CarFeature/UpdateCarFeatureAvailableChangeToFalse/{item.CarFeatureId}");
+
+                }
+            }
+
+            var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarFeature/{carId}");
+            if (resultMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await resultMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultCarFeatureByCarIdDto>>(jsonData);
+                return View(values);
+            }
 
 
             return View();
