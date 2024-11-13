@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class CarFeatureDetailController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -14,9 +15,11 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-
+        [HttpGet("{carId}")]
         public async Task<IActionResult> Index(int carId)
         {
+            ViewBag.Id = carId;
+
             var client = _httpClientFactory.CreateClient();
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarFeature/{carId}");
             if(resultMessage.IsSuccessStatusCode)
@@ -26,7 +29,6 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
                 return View(values);
             }
 
-            ViewBag.Id = carId;
             return View();
         }
     }
