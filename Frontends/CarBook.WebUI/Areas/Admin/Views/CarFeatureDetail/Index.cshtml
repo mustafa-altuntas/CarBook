@@ -1,8 +1,42 @@
-﻿
+﻿@model List<ResultCarFeatureByCarIdDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-<h1>Index => @ViewBag.Id</h1>
 
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">
+                Araca Ait Özellikler Listesi
+            </h4>
+            <p class="card-subtitle mb-4">
+                Araca ait özellik eklemesi yapabilir, mevcut özellikleri kaldırabilir, ilgili güncellemeleri gerçeklestirebilirsiniz.
+            </p>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @foreach (var item in Model)
+                    {
+                        <div class="form-check">
+                            <input type="hidden" asp-for="@item.CarFeatureId" />
+                            <input type="hidden" asp-for="@item.FeatureName" />
+                            <input type="checkbox" asp-for="@item.Available" class="form-check-input" />
+                            <label class="form-check-label" asp-for="@item.Available">@item.FeatureName</label>
+
+                        </div>
+                    }
+
+                </div>
+                <button class="btn btn-success mt-5">Kaydet</button>
+            }
+
+        </div>
+    </div>
+</div>
