@@ -1,4 +1,5 @@
 ﻿using Carbook.DTO.CarFeatureDtos;
+using Carbook.DTO.FeatureDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -52,6 +53,23 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
             TempData["SuccessMessage"] = "İşlem başarıyla tamamlandı!";
             return RedirectToAction("Index", new { carId = carId });
+        }
+
+
+        [HttpGet("{carId}")]
+        public async Task<IActionResult> CreateFeatureByCarId()
+        {
+
+            var client = _httpClientFactory.CreateClient();
+            var resultMessage = await client.GetAsync($"https://localhost:7112/api/Feature");
+            if (resultMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await resultMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultFeatureDto>>(jsonData);
+                return View(values);
+            }
+
+            return View();
         }
 
     }
