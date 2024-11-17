@@ -21,15 +21,15 @@ namespace CarBook.Aplication.Features.Mediator.Handlers.ReviewHandlers
 
         public async Task Handle(UpdateReviewCommand request, CancellationToken cancellationToken)
         {
-            await _repository.UpdateAsync(new Review
-            {
-                CarId = request.CarId,
-                Comment = request.Comment,
-                CustomerImage = request.CustomerImage,
-                CustomerName = request.CustomerName,
-                RaytingValue = request.RaytingValue,
-                ReviewDate = DateTime.Now
-            });
+            var value = await _repository.GetByIdAsync(request.ReviewId);
+            value.CarId = request.CarId;
+            value.Comment = request.Comment;
+            value.CustomerImage = request.CustomerImage;
+            value.CustomerName = request.CustomerName;
+            value.RaytingValue = request.RaytingValue;
+            value.ReviewDate = DateTime.Now;
+
+            await _repository.UpdateAsync(value);
         }
     }
 }
