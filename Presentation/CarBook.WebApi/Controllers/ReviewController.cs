@@ -17,6 +17,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("ReviewListByCarId")]
         public async Task<IActionResult> ReviewListByCarId(int carId)
         {
             var values = await _mediator.Send(new GetReviewByCarIdQuery(carId));
