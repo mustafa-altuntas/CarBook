@@ -14,8 +14,9 @@ namespace CarBook.Aplication.Validators.ReviewValidators
         {
             RuleFor(x => x.CustomerName).NotEmpty().WithMessage("Lütfen müşteri adını boş geçmeyiniz")
                 .MinimumLength(3).WithMessage("Lütfen en az 3 karakter veri girişi yapınız.");
-            RuleFor(x => x.RaytingValue).NotNull().WithMessage("Lütfen puan değerini boş geçmeyiniz.");
-            RuleFor(x => x.Comment).Empty().WithMessage("Lütfen yorum değerini boş geçmeyiniz.");
+            RuleFor(x => x.RaytingValue).NotEmpty().WithMessage("Lütfen puan değerini boş geçmeyiniz.")
+                .NotNull().WithMessage("Lütfen puan değerini boş geçmeyiniz.");
+            RuleFor(x => x.Comment).NotEmpty().WithMessage("Lütfen yorum değerini boş geçmeyiniz.");
         }
 
     }

@@ -16,6 +16,8 @@ using CarBook.Aplication.Interfaces.ReviewInterfaces;
 using CarBook.Aplication.Interfaces.StatisticInterfaces;
 using CarBook.Aplication.Interfaces.TagCloudBlogInterfaces;
 using CarBook.Aplication.Services;
+using CarBook.Aplication.Validators.ReviewValidators;
+using CarBook.Domain;
 using CarBook.Persistence.Context;
 using CarBook.Persistence.Repositories;
 using CarBook.Persistence.Repositories.BlogRepositories;
@@ -28,6 +30,8 @@ using CarBook.Persistence.Repositories.RentACarRepositories;
 using CarBook.Persistence.Repositories.ReviewRepositories;
 using CarBook.Persistence.Repositories.StatisticRepositories;
 using CarBook.Persistence.Repositories.TagCloudBlogRepositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,7 +98,9 @@ builder.Services.AddServiceRegistiration(builder.Configuration);
 
 
 
-
+builder.Services.AddFluentValidationAutoValidation();
+//builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateReviewValidator>();
 
 
 builder.Services.AddControllers();

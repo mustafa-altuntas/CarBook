@@ -1,5 +1,6 @@
 ﻿using CarBook.Aplication.Features.Mediator.Commands.ReviewCommands;
 using CarBook.Aplication.Features.Mediator.Queries.ReviewQueries;
+using CarBook.Aplication.Validators.ReviewValidators;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
