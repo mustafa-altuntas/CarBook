@@ -19,7 +19,7 @@
                 <div class="tab-content" id="pills-tabContent">
 
                     @await Component.InvokeAsync("_CarDetailCarFeatureByCarIdComponentPartial", new { carId = ViewBag.CarId })
-                    @await Component.InvokeAsync("_CarDetailDescriptionComponentPartial", new { carId = ViewBag.CarId })
+                    @await Component.InvokeAsync("_CarDetailDescriptionByCarIdComponentPartial", new { carId = ViewBag.CarId })
 
 
                     <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
