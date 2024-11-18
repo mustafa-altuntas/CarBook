@@ -19,7 +19,7 @@ namespace CarBook.WebApi.Controllers
             this.mediator = mediator;
         }
 
-        [HttpPost("CreateUser")]
+        [HttpPost]
         public async Task<IActionResult> CreateUser(CreateAppUserCommand command)
         {
             await mediator.Send(command);
