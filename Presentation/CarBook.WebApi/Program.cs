@@ -6,6 +6,7 @@ using CarBook.Aplication.Features.CQRS.Handlers.CategoryHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.ContactHandlers;
 using CarBook.Aplication.Features.RepositoryPattern;
 using CarBook.Aplication.Interfaces;
+using CarBook.Aplication.Interfaces.AppUserInterfaces;
 using CarBook.Aplication.Interfaces.BlogInterfaces;
 using CarBook.Aplication.Interfaces.CarDescriptionInterfaces;
 using CarBook.Aplication.Interfaces.CarFeatureInterfaces;
@@ -20,6 +21,7 @@ using CarBook.Aplication.Validators.ReviewValidators;
 using CarBook.Domain;
 using CarBook.Persistence.Context;
 using CarBook.Persistence.Repositories;
+using CarBook.Persistence.Repositories.AppUserRepositories;
 using CarBook.Persistence.Repositories.BlogRepositories;
 using CarBook.Persistence.Repositories.CarDescriptionRepositories;
 using CarBook.Persistence.Repositories.CarFeatureRepositories;
@@ -73,6 +75,7 @@ builder.Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepositor
 builder.Services.AddScoped(typeof(ICarFeatureRepository),typeof(CarFeatureRepository));
 builder.Services.AddScoped(typeof(ICarDescriptionRepository),typeof(CarDescriptionRepository));
 builder.Services.AddScoped(typeof(IReviewRepository),typeof(ReviewRepository));
+builder.Services.AddScoped(typeof(IAppUserRepository),typeof(AppUserRepository));
 
 
 builder.Services.AddScoped<CreateAboutCommandHandler>();
