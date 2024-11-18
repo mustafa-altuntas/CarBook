@@ -16,14 +16,14 @@ namespace CarBook.WebUI.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateAppUser()
+        public IActionResult Index()
         {
             return View();
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateAppUser(CreateRegisterDto dto)
+        public async Task<IActionResult> Index(CreateRegisterDto dto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(dto);
