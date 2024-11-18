@@ -17,6 +17,7 @@ using CarBook.Aplication.Interfaces.ReviewInterfaces;
 using CarBook.Aplication.Interfaces.StatisticInterfaces;
 using CarBook.Aplication.Interfaces.TagCloudBlogInterfaces;
 using CarBook.Aplication.Services;
+using CarBook.Aplication.Tools;
 using CarBook.Aplication.Validators.ReviewValidators;
 using CarBook.Domain;
 using CarBook.Persistence.Context;
@@ -46,10 +47,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.RequireHttpsMetadata = false; //HttpS kullanýlsýnmý
     opt.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidAudience = "https://localhost", // dinleyici, izleyici
-        ValidIssuer = "https://localhost",  // yayýncý
+        ValidAudience = JwtTokenDefaults.ValidAudience, // dinleyici, izleyici
+        ValidIssuer = JwtTokenDefaults.ValidIssuer,  // yayýncý
         ClockSkew = TimeSpan.Zero, // token baþlangýç zamanýný sýfýrlar
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("carbookcarbook01")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true
     };
@@ -148,6 +149,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
