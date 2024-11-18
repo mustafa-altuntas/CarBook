@@ -47,7 +47,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.TokenValidationParameters = new TokenValidationParameters
     {
         ValidAudience = "https://localhost", // dinleyici, izleyici
-        ValidIssuer = "http://localhost",  // yayýncý
+        ValidIssuer = "https://localhost",  // yayýncý
         ClockSkew = TimeSpan.Zero, // token baþlangýç zamanýný sýfýrlar
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("carbookcarbook01")),
         ValidateLifetime = true,
