@@ -2,10 +2,12 @@
 using CarBook.Aplication.Features.Mediator.Commands.BlogCommands;
 using CarBook.Aplication.Features.Mediator.Queries.BlogQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogController : ControllerBase
