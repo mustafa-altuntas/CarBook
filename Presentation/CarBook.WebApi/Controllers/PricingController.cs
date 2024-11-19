@@ -1,10 +1,12 @@
 ﻿using CarBook.Aplication.Features.Mediator.Commands.PricingCommands;
 using CarBook.Aplication.Features.Mediator.Queries.PricingQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PricingController : ControllerBase
