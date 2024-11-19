@@ -1,11 +1,13 @@
 ﻿using CarBook.Aplication.Features.CQRS.Commands.BrandCommands;
 using CarBook.Aplication.Features.CQRS.Handlers.BrandHandlers;
 using CarBook.Aplication.Features.CQRS.Queries.BrandQueries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class BrandController : ControllerBase
