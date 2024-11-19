@@ -28,7 +28,7 @@ namespace CarBook.WebApi.Controllers
             _updateCategoryCommandHandler = updateCategoryCommandHandler;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> CategoryList()
         {
@@ -36,6 +36,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {

@@ -18,6 +18,7 @@ namespace CarBook.WebApi.Controllers
             this.mediator = mediator;
         }
 
+
         [HttpGet("GetAllStatistics")]
         public async Task<IActionResult> GetAllStatistics()
         {

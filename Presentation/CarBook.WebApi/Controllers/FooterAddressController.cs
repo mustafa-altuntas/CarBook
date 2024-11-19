@@ -19,6 +19,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> FooterAddressList()
         {
@@ -26,6 +27,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFooterAddress(int id)
         {

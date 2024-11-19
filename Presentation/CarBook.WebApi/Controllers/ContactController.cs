@@ -27,7 +27,7 @@ namespace CarBook.WebApi.Controllers
             _updateContactCommandHandler = updateContactCommandHandler;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> ContactList()
         {
@@ -35,6 +35,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetContact(int id)
         {

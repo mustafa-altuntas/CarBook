@@ -18,6 +18,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> FeatureList()
         {
@@ -25,6 +26,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFeature(int id)
         {

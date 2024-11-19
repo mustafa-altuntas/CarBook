@@ -21,6 +21,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet("ReviewListByCarId")]
         public async Task<IActionResult> ReviewListByCarId(int carId)
         {

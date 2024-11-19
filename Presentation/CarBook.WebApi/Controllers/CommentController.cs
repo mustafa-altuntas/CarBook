@@ -22,7 +22,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult CommentList()
         {
@@ -51,6 +51,7 @@ namespace CarBook.WebApi.Controllers
             return Ok("Yorum başarıyla silindi.");
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetComment(int id)
         {
@@ -58,14 +59,15 @@ namespace CarBook.WebApi.Controllers
             return Ok(value);
         }
 
-
+        [AllowAnonymous]
         [HttpGet("CommentListByBlog")]
         public IActionResult CommentListByBlog(int id)
         {
             var value = _repository.GetCommentsByBlogId(id);
             return Ok(value);
         }
-        
+
+        [AllowAnonymous]
         [HttpGet("GetCountCommentByBlog")]
         public IActionResult GetCountCommentByBlog(int id)
         {
@@ -73,6 +75,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(value);
         }
 
+        [AllowAnonymous]
         [HttpPost("CreateCommentWithMediator")]
         public async Task<IActionResult> CreateCommentWithMediator(CreateCommentCommand createCommentCommand)
         {

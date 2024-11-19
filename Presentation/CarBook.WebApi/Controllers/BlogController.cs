@@ -21,7 +21,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -29,6 +29,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSocialMediaById(int id)
         {
@@ -57,6 +58,7 @@ namespace CarBook.WebApi.Controllers
             return Ok("Blog bilgisi silindi.");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetLast3BlogsWhitAuthorsList")]
         public async Task<IActionResult> GetLast3BlogsWhitAuthorsList()
         {
@@ -64,6 +66,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllBlogsWithAuthorList")]
         public async Task<IActionResult> GetAllBlogsWithAuthorList()
         {
@@ -71,7 +74,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetBlogByIdWithAuthor")]
         public async Task<IActionResult> GetBlogByIdWithAuthor(int id)
         {

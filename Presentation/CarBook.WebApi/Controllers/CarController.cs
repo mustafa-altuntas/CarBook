@@ -37,7 +37,7 @@ namespace CarBook.WebApi.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> CarList()
         {
@@ -45,6 +45,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCar(int id)
         {
@@ -78,7 +79,7 @@ namespace CarBook.WebApi.Controllers
 
         }
 
-
+        [AllowAnonymous]
         [HttpGet("CarListWithBrand")]
         public IActionResult CarListWithBrand()
         {
@@ -86,7 +87,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetLast5CarsWhithBrands")]
         public IActionResult GetLast5CarsWhithBrands()
         {

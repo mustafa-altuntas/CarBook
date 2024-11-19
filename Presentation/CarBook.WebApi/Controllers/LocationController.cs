@@ -21,7 +21,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -29,6 +29,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(value);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLocationById(int id)
         {

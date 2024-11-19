@@ -29,7 +29,7 @@ namespace CarBook.WebApi.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> BrandList()
         {
@@ -37,6 +37,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBrand(int id)
         {

@@ -28,7 +28,7 @@ namespace CarBook.WebApi.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> AboutList()
         {
@@ -36,6 +36,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAbout(int id)
         {

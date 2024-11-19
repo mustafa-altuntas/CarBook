@@ -21,7 +21,7 @@ namespace CarBook.WebApi.Controllers
             _mediator = mediator;
         }
 
-
+        [AllowAnonymous]
         [HttpGet("{carId}")]
         public async Task<IActionResult> GetCarFeatureListByCarId(int carId)
         {
@@ -29,6 +29,7 @@ namespace CarBook.WebApi.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("UpdateCarFeatureAvailableChangeToFalse/{id}")]
         public async Task<IActionResult> UpdateCarFeatureAvailableChangeToFalse(int id)
         {
@@ -36,6 +37,7 @@ namespace CarBook.WebApi.Controllers
             return Ok("Güncelleme yapıldı.");
         }
 
+        [AllowAnonymous]
         [HttpGet("UpdateCarFeatureAvailableChangeToTrue/{id}")]
         public async Task<IActionResult> UpdateCarFeatureAvailableChangeToTrue(int id)
         {
