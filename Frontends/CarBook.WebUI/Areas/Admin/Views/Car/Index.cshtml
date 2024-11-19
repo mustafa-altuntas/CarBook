@@ -16,7 +16,7 @@
                 Arabalar ile ilgili ekleme, silme, güncelleme, arama ve listeleme gibi işlemleri bu sayfa üzerinden gerçekleştirebilirsiniz.
             </p>
             <div class="button-examples mb-3">
-                <a href="/AdminCar/CreateCar" class="btn btn-outline-secondary waves-effect waves-light">Yeni Araç Oluştur</a>
+                <a href="/Admin/Car/CreateCar" class="btn btn-outline-secondary waves-effect waves-light">Yeni Araç Oluştur</a>
 
             </div>
             <div class="table-responsive">
@@ -46,8 +46,8 @@
                                 <td>@item.Model</td>
                                 <td>@item.Transmission</td>
                                 <td>@item.Km</td>
-                                <td><a href="/AdminCar/RemoveCar/@item.CarId" class="btn btn-outline-danger">Sil</a></td>
-                                <td><a href="/AdminCar/UpdateCar/@item.CarId" class="btn btn-outline-success">Güncelle</a></td>
+                                <td><a href="/Admin/Car/RemoveCar/@item.CarId" class="btn btn-outline-danger">Sil</a></td>
+                                <td><a href="/Admin/Car/UpdateCar/@item.CarId" class="btn btn-outline-success">Güncelle</a></td>
                                 <td><a href="/Admin/CarFeatureDetail/Index/@item.CarId" class="btn btn-outline-dark">Detaylar</a></td>
                                 <td><a href="/Admin/CarFeatureDetail/CreateFeatureByCarId/@item.CarId" class="btn btn-outline-info">Özellik Ata</a></td>
                                 <td><a href="/Car/CarDetail/@item.CarId" class="btn btn-outline-warning">Sitede Gör</a></td>

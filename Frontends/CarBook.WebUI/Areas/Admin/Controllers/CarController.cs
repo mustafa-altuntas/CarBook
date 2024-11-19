@@ -35,7 +35,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             return View();
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> CreateCar()
         {
             var client = _httpClientFactory.CreateClient();
@@ -86,6 +86,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
                 :View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> UpdateCar(int id)
         {
             var client = _httpClientFactory.CreateClient();

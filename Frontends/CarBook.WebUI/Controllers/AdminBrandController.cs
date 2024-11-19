@@ -1,10 +1,12 @@
 ﻿using Carbook.DTO.BrandDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace CarBook.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminBrandController : Controller
     {
 

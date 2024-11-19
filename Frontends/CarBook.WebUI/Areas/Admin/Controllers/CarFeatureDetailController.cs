@@ -1,10 +1,12 @@
 ﻿using Carbook.DTO.CarFeatureDtos;
 using Carbook.DTO.FeatureDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     [Route("Admin/[controller]/[action]")]
     public class CarFeatureDetailController : Controller
