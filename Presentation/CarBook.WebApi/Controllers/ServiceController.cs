@@ -1,10 +1,12 @@
 ﻿using CarBook.Aplication.Features.Mediator.Commands.ServiceCommands;
 using CarBook.Aplication.Features.Mediator.Queries.ServiceQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ServiceController : ControllerBase
