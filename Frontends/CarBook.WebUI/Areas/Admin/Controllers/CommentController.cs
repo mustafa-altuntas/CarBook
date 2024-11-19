@@ -19,7 +19,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int id)
         {
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resutlMessage = await client.GetAsync($"https://localhost:7112/api/Comment/CommentListByBlog?id={id}");
             if (resutlMessage.IsSuccessStatusCode)
             {

@@ -5,24 +5,29 @@ namespace CarBook.WebUI.Handlers
 {
     public class TokenHandler:DelegatingHandler
     {
-        private readonly IHttpContextAccessor _contextAccessor;
 
-        public TokenHandler(IHttpContextAccessor contextAccessor)
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public TokenHandler(IHttpContextAccessor httpContextAccessor)
         {
-            _contextAccessor = contextAccessor;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var token = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "CarBookJwtCookie")?.Value;
+            
+            var token = _httpContextAccessor.HttpContext?.User?.Claims
+                            .FirstOrDefault(c => c.Type == "carbooktoken")?.Value;
 
-            if(string.IsNullOrEmpty(token))
+            if (!string.IsNullOrEmpty(token))
             {
-                request.Headers.Authorization  = new AuthenticationHeaderValue("Bearer",token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
 
-            return base.SendAsync(request, cancellationToken);
+            return await base.SendAsync(request, cancellationToken);
         }
+
 
     }
 }

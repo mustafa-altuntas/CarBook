@@ -20,7 +20,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resutlMessage = await client.GetAsync("https://localhost:7112/api/FooterAddress");
             if (resutlMessage.IsSuccessStatusCode)
             {
@@ -42,7 +42,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateFooterAddressDto createFooterAddressDto)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(createFooterAddressDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PostAsync("https://localhost:7112/api/FooterAddress", stringContent);
@@ -57,7 +57,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Remove(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/FooterAddress/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -70,7 +70,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/FooterAddress/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -91,7 +91,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         {
             updateFooterAddressDto.FooterAddressId = (int)TempData["UpdateFooterAddressId"];
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(updateFooterAddressDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PutAsync("https://localhost:7112/api/FooterAddress", stringContent);

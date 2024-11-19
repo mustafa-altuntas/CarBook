@@ -23,7 +23,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         {
             ViewBag.Id = carId;
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarFeature/{carId}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -38,7 +38,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [HttpPost("{carId}")]
         public async Task<IActionResult> Index(List<ResultCarFeatureByCarIdDto> dtos, int carId)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
 
             foreach (var item in dtos)
             {
@@ -62,7 +62,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> CreateFeatureByCarId()
         {
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/Feature");
             if (resultMessage.IsSuccessStatusCode)
             {

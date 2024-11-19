@@ -16,7 +16,7 @@ namespace CarBook.WebUI.Areas.Admin.ViewComponents.DashboardComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resutlMessage = await client.GetAsync("https://localhost:7112/api/Blog/GetAllBlogsWithAuthorList");
             if (resutlMessage.IsSuccessStatusCode)
             {

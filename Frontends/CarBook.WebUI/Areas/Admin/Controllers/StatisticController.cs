@@ -22,7 +22,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/Statistic/GetAllStatistics");
             if(resultMessage.IsSuccessStatusCode)
             {
@@ -34,6 +34,13 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
 
             return View();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> merhaba()
+        {
+            return Ok();
         }
     }
 }

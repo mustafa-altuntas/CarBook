@@ -20,7 +20,7 @@ namespace CarBook.WebUI.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resutlMessage = await client.GetAsync("https://localhost:7112/api/Brand");
             if (resutlMessage.IsSuccessStatusCode)
             {
@@ -42,7 +42,7 @@ namespace CarBook.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateBrandDto createBrandDto)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(createBrandDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PostAsync("https://localhost:7112/api/Brand", stringContent);
@@ -56,7 +56,7 @@ namespace CarBook.WebUI.Controllers
 
         public async Task<IActionResult> Remove(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/Brand/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -69,7 +69,7 @@ namespace CarBook.WebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/Brand/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -90,7 +90,7 @@ namespace CarBook.WebUI.Controllers
         {
             updateBrandDto.BrandId = (int)TempData["UpdateBrandId"];
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(updateBrandDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PutAsync("https://localhost:7112/api/Brand", stringContent);

@@ -23,7 +23,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             var token = User.Claims.FirstOrDefault(x => x.Type == "carbooktoken")?.Value;
             if (token != null)
             {
-                var client = _httpClientFactory.CreateClient();
+                var client = _httpClientFactory.CreateClient("MyApiClient");
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 var resutlMessage = await client.GetAsync("https://localhost:7112/api/Location");
@@ -41,7 +41,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         //public async Task<IActionResult> Index()
         //{
 
-        //    var client = _httpClientFactory.CreateClient();
+        //    var client = _httpClientFactory.CreateClient("MyApiClient");
         //    var resutlMessage = await client.GetAsync("https://localhost:7112/api/Location");
         //    if (resutlMessage.IsSuccessStatusCode)
         //    {
@@ -63,7 +63,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateLocationDto createLocationDto)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(createLocationDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PostAsync("https://localhost:7112/api/Location", stringContent);
@@ -78,7 +78,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Remove(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/Location/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -91,7 +91,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/Location/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -112,7 +112,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         {
             updateLocationDto.LocationId = (int)TempData["UpdateLocationId"];
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(updateLocationDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PutAsync("https://localhost:7112/api/Location", stringContent);

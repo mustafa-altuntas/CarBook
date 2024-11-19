@@ -19,7 +19,7 @@ namespace CarBook.WebUI.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resutlMessage = await client.GetAsync("https://localhost:7112/api/Feature");
             if (resutlMessage.IsSuccessStatusCode)
             {
@@ -39,7 +39,7 @@ namespace CarBook.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateFeature(CreateFeatureDto createFeatureDto)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(createFeatureDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PostAsync("https://localhost:7112/api/Feature", stringContent);
@@ -53,7 +53,7 @@ namespace CarBook.WebUI.Controllers
 
         public async Task<IActionResult> RemoveFeature(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/Feature/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -65,7 +65,7 @@ namespace CarBook.WebUI.Controllers
 
         public async Task<IActionResult> UpdateFeature(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/Feature/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -85,7 +85,7 @@ namespace CarBook.WebUI.Controllers
         {
             updateFeatureDto.FeatureId = (int)TempData["UpdateFeatureId"];
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(updateFeatureDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PutAsync("https://localhost:7112/api/Feature", stringContent);

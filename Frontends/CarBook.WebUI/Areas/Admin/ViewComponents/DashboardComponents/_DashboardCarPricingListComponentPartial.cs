@@ -15,7 +15,7 @@ namespace CarBook.WebUI.Areas.Admin.ViewComponents.DashboardComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/CarPricing/GetCarPricingWithTimePeriod");
             if (resultMessage.IsSuccessStatusCode)
             {

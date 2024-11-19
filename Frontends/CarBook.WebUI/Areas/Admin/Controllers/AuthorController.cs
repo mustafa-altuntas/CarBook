@@ -22,7 +22,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resutlMessage = await client.GetAsync("https://localhost:7112/api/Author");
             if (resutlMessage.IsSuccessStatusCode)
             {
@@ -44,7 +44,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateAuthorDto createAuthorDto)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(createAuthorDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PostAsync("https://localhost:7112/api/Author", stringContent);
@@ -59,7 +59,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Remove(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.DeleteAsync($"https://localhost:7112/api/Author/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -72,7 +72,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var resultMessage = await client.GetAsync($"https://localhost:7112/api/Author/{id}");
             if (resultMessage.IsSuccessStatusCode)
             {
@@ -93,7 +93,7 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         {
             updateAuthorDto.AuthorID = (int)TempData["UpdateAuthorId"];
 
-            var client = _httpClientFactory.CreateClient();
+            var client = _httpClientFactory.CreateClient("MyApiClient");
             var jsonData = JsonConvert.SerializeObject(updateAuthorDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var resultMessage = await client.PutAsync("https://localhost:7112/api/Author", stringContent);
