@@ -1,3 +1,4 @@
+using CarBook.WebUI.Handlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCo
     opt.Cookie.Name = "CarBookJwtCookie";
 });
 
+
+
+builder.Services.AddHttpClient("MyApiClient")
+        .AddHttpMessageHandler<TokenHandler>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<TokenHandler>();
 
 
 var app = builder.Build();

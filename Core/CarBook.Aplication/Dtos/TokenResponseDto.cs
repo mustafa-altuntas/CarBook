@@ -8,13 +8,13 @@ namespace CarBook.Aplication.Dtos
 {
     public class TokenResponseDto
     {
-        public TokenResponseDto(string toke, DateTime expireDate)
+        public TokenResponseDto(string token, DateTime expireDate)
         {
-            Toke = toke;
+            Token = token;
             ExpireDate = expireDate;
         }
 
-        public string Toke { get; set; }
+        public string Token { get; set; }
         public DateTime ExpireDate { get; set; }
         
     }

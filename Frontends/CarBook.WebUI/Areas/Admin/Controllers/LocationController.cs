@@ -1,10 +1,13 @@
 ﻿using Carbook.DTO.LocationDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class LocationController : Controller
     {
@@ -17,18 +20,38 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-            var client = _httpClientFactory.CreateClient();
-            var resutlMessage = await client.GetAsync("https://localhost:7112/api/Location");
-            if (resutlMessage.IsSuccessStatusCode)
+            var token = User.Claims.FirstOrDefault(x => x.Type == "carbooktoken")?.Value;
+            if (token != null)
             {
-                var jsonData = await resutlMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
-                return View(values);
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var resutlMessage = await client.GetAsync("https://localhost:7112/api/Location");
+                if (resutlMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await resutlMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
+                    return View(values);
+                }
             }
 
             return View();
         }
+
+        //public async Task<IActionResult> Index()
+        //{
+
+        //    var client = _httpClientFactory.CreateClient();
+        //    var resutlMessage = await client.GetAsync("https://localhost:7112/api/Location");
+        //    if (resutlMessage.IsSuccessStatusCode)
+        //    {
+        //        var jsonData = await resutlMessage.Content.ReadAsStringAsync();
+        //        var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
+        //        return View(values);
+        //    }
+
+        //    return View();
+        //}
 
         [HttpGet]
         public IActionResult Create()
