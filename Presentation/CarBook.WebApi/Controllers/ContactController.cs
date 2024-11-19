@@ -1,10 +1,12 @@
 ﻿using CarBook.Aplication.Features.CQRS.Commands.ContactCommands;
 using CarBook.Aplication.Features.CQRS.Handlers.ContactHandlers;
 using CarBook.Aplication.Features.CQRS.Queries.ContactQueries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ContactController : ControllerBase
