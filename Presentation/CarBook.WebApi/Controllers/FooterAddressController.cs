@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using CarBook.Aplication.Features.Mediator.Queries.FooterAddressQueries;
 using CarBook.Aplication.Features.Mediator.Commands.FooterAddressCommands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarBook.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class FooterAddressController : ControllerBase
