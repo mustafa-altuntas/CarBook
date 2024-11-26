@@ -42,6 +42,24 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 
+
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CarbookCorsPolicy", corsPolicyBuilder =>
+    {
+        corsPolicyBuilder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed((host) => true)
+        .AllowCredentials();
+    });
+});
+
+
+
+
+
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
     opt.RequireHttpsMetadata = false; //HttpS kullanýlsýnmý
