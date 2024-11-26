@@ -55,7 +55,7 @@ builder.Services.AddCors(opt =>
     });
 });
 
-
+builder.Services.AddSignalR();
 
 
 
@@ -164,6 +164,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+app.UseCors("CarbookCorsPolicy");
 
 app.UseHttpsRedirection();
 
