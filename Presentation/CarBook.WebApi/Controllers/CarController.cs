@@ -2,10 +2,12 @@
 using CarBook.Aplication.Features.CQRS.Handlers.CarHandlers;
 using CarBook.Aplication.Features.CQRS.Queries.CarQueries;
 using CarBook.Aplication.Features.Mediator.Queries.StatisticQueries;
+using CarBook.WebApi.Hubs;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace CarBook.WebApi.Controllers
 {
@@ -24,8 +26,11 @@ namespace CarBook.WebApi.Controllers
         private readonly GetLast5CarsWhithBrandsQueryHandler _getLast5CarsWhithBrandsQueryHandler;
 
 
+        private readonly IHubContext<CarHub> _hubContext;
 
-        public CarController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, RemoveCarCommandHandler removeCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWhithBrandsQueryHandler getLast5CarsWhithBrandsQueryHandler)
+
+
+        public CarController(CreateCarCommandHandler createCarCommandHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, RemoveCarCommandHandler removeCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWhithBrandsQueryHandler getLast5CarsWhithBrandsQueryHandler, IHubContext<CarHub> hubContext)
         {
             _createCarCommandHandler = createCarCommandHandler;
             _getCarByIdQueryHandler = getCarByIdQueryHandler;
@@ -34,6 +39,7 @@ namespace CarBook.WebApi.Controllers
             _updateCarCommandHandler = updateCarCommandHandler;
             _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
             _getLast5CarsWhithBrandsQueryHandler = getLast5CarsWhithBrandsQueryHandler;
+            _hubContext = hubContext;
         }
 
 
@@ -60,6 +66,10 @@ namespace CarBook.WebApi.Controllers
         public async Task<IActionResult> CreateCar(CreateCarCommand command)
         {
             await _createCarCommandHandler.Handler(command);
+
+            await _hubContext.Clients.All.SendAsync("RefreshCarCount");
+
+
             return Ok("Araç bilgisi eklendi.");
         }
 
@@ -75,6 +85,9 @@ namespace CarBook.WebApi.Controllers
         public async Task<IActionResult> DeleteCar(int id)
         {
             await _removeCarCommandHandler.Handler(new RemoveCarCommand() { CarId=id});
+            
+            await _hubContext.Clients.All.SendAsync("RefreshCarCount");
+
             return Ok("Araç bilgisi silindi.");
 
         }
