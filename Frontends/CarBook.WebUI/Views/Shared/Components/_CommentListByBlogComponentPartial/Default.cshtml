@@ -1,4 +1,14 @@
 ﻿@model List<ResutlCommentDto>
+@{
+    var rnd1 = new Dictionary<int, int>()
+    {
+        {1014,1},
+        {1015,1},
+        {1019,2},
+        {1020,1},
+        {1021,2}
+    };
+}
 
 
 
@@ -13,7 +23,9 @@
 
         <li class="comment">
             <div class="vcard bio">
-                <img src="~/carbook/images/person_1.jpg" alt="Image placeholder">
+                <img src="~/carbook/images/person_@{
+                rnd1[item.CommentID].ToString();
+}.jpg" alt="Image placeholder">
             </div>
             <div class="comment-body">
                 <h3>@item.Name</h3>
@@ -25,3 +37,5 @@
     }
 
 </ul>
+
+

@@ -21,12 +21,27 @@ namespace CarBook.WebUI.Controllers
             ViewBag.v1 = "Bloglar";
             ViewBag.v2 = "Bloglar";
 
+
+            List<ResultAllBlogsWithAuthorDto> values;
+
+
             var client = _httpClientFactory.CreateClient();
             var resultMessage = await client.GetAsync("https://localhost:7112/api/Blog/GetAllBlogsWithAuthorList");
             if (resultMessage.IsSuccessStatusCode)
             {
                 var jsonData = await resultMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultAllBlogsWithAuthorDto>>(jsonData);
+                values = JsonConvert.DeserializeObject<List<ResultAllBlogsWithAuthorDto>>(jsonData);
+
+                foreach (var blog in values)
+                {
+                    var responseMessage1 = await client.GetAsync($"https://localhost:7112/api/Comment/CommentListByBlog?id={blog.BlogID}");
+                    if (responseMessage1.IsSuccessStatusCode)
+                    {
+                        var jsonD = await responseMessage1.Content.ReadAsStringAsync();
+                        blog.CommentCount = JsonConvert.DeserializeObject<List<ResutlCommentDto>>(jsonD).Count;
+                    }
+
+                }
                 return View(values);
             }
 

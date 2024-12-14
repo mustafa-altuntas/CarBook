@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Carbook.DTO.CarPricingDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,10 @@ namespace Carbook.DTO.CarDtos
         public byte Luggage { get; set; }
         public string Fuel { get; set; }
         public string BigImageUrl { get; set; }
+
+        public ResultCarPricingWithTimePeriodDto ResultCarPricing { get; set; }
+
+
 
     }
 }

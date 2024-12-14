@@ -19,5 +19,7 @@ namespace Carbook.DTO.BlogDtos
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
+
+        public int CommentCount { get; set; } = 0;
     }
 }

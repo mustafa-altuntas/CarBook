@@ -1,5 +1,10 @@
 ﻿@model List<ResultLast3BlogsWhitAuthorsDto>
 
+@{
+    Random rnd = new Random();
+     
+}
+
 
 
 
@@ -14,9 +19,9 @@
             <div class="text">
                 <h3 class="heading"><a href="#">@item.Title</a></h3>
                 <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span>@item.CreatedDate.ToShortDateString()</a></div>
+                    <div><a href="#"><span class="icon-calendar"></span> @item.CreatedDate.ToShortDateString()</a></div>
                     <div><a href="#"><span class="icon-person"></span> @item.AuthorName</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    <div><a href="#"><span class="icon-chat"></span> @rnd.Next(5, 20) </a></div>
                 </div>
             </div>
         </div>

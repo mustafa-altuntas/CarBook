@@ -43,6 +43,10 @@ namespace CarBook.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(CreateReservationDto dto)
         {
+
+
+
+
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(dto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -53,6 +57,20 @@ namespace CarBook.WebUI.Controllers
                 //return RedirectToAction("Index", "Brand", new { area = "Admin" });
             }
             var v = resultMessage.RequestMessage;
+
+            ViewBag.v3 = dto.CarId;
+
+            var resultMessage1 = await client.GetAsync($"https://localhost:7112/api/Location");
+            if (resultMessage1.IsSuccessStatusCode)
+            {
+                var jsonData1 = await resultMessage1.Content.ReadAsStringAsync();
+                var values1 = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData1);
+
+                List<SelectListItem> selectListItems = values1.Select(l => new SelectListItem { Text = l.Name, Value = l.LocationId.ToString() }).ToList();
+                ViewBag.LocationSelectList = selectListItems;
+
+            }
+
 
             return View(dto);
         }
