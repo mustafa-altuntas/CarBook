@@ -1,3 +1,4 @@
+using CarBook.Aplication;
 using CarBook.Aplication.Features.CQRS.Handlers.AboutHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.BannerHandlers;
 using CarBook.Aplication.Features.CQRS.Handlers.BrandHandlers;
@@ -20,6 +21,7 @@ using CarBook.Aplication.Services;
 using CarBook.Aplication.Tools;
 using CarBook.Aplication.Validators.ReviewValidators;
 using CarBook.Domain;
+using CarBook.Persistence;
 using CarBook.Persistence.Context;
 using CarBook.Persistence.Repositories;
 using CarBook.Persistence.Repositories.AppUserRepositories;
@@ -44,6 +46,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient();
 
+builder.Services.AddPersistenceServices(builder.Configuration);
 
 
 
@@ -77,6 +80,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+
+
+builder.Services.ConfigureAutoMapper();
 
 
 

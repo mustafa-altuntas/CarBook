@@ -1,39 +1,41 @@
-### CarBook Vehicle Rental Project
+# CarBook Araç Kiralama Projesi
 
-The **CarBook Vehicle Rental Project** was developed as part of Murat Yücedağ's Udemy course titled "Asp.Net Core Api 8.0 Onion Architecture with BookCar Project." This project is a Web API and MVC application built using ASP.NET Core 8.0, aimed at simplifying vehicle rental processes.
+CarBook Araç Kiralama Projesi, araç kiralama süreçlerini kolaylaştırmak amacıyla bireysel olarak geliştirilmiş bir Web API ve MVC uygulamasıdır. ASP.NET Core 8.0 kullanılarak tasarlanan bu proje, modern yazılım mimarileri ve en iyi uygulama yöntemleri göz önünde bulundurularak inşa edilmiştir.
 
-### Project Features
-- **Onion Architecture**: The project is designed using Onion architecture principles, providing an independent and sustainable structure for the application.
-- **CQRS and Mediator Patterns**: Command Query Responsibility Segregation (CQRS) and Mediator patterns are employed for business logic and data management, enhancing modularity and testability.
-- **User Authorization**: User and role authorizations are securely managed using JWT (JSON Web Token).
+## Proje Özellikleri
+- **Onion Architecture (Soğan Mimarisi)**: Proje, bağımsız ve süredırılebilir bir yapı sağlamak için Onion Architecture prensiplerine göre tasarlanmıştır.
+- **CQRS ve Mediator Tasarım Desenleri**: İş mantığı ve veri yönetimi için Command Query Responsibility Segregation (CQRS) ve Mediator tasarım desenleri kullanılarak modülerlik ve test edilebilirlik artırılmıştır.
+- **Kullanıcı Yetkilendirme**: Kullanıcı ve rol bazlı yetkilendirme JWT (JSON Web Token) ile güvenli bir şekilde yönetilmektedir.
 
-### Application Functions
-- **Vehicle Rental**: Users can view available vehicles based on selected dates and locations.
-- **Admin Panel**: A separate interface for administrators allows CRUD operations on all functionalities.
-- **Detailed Vehicle Information**: Access to detailed information about vehicle prices, features, and user reviews.
-- **Blog and Contact**: Users can comment on blogs and send messages through a contact form.
+## Uygulama İşlevleri
+- **Araç Kiralama**: Kullanıcılar, seçilen tarihler ve konumlara göre uygun araçları görüntüleyebilir.
+- **Yönetici Paneli**: Yöneticiler için ayrı bir arayüz sağlanmış olup tüm işlemler için CRUD (Create, Read, Update, Delete) işlemleri yapılabilir.
+- **Detaylı Araç Bilgileri**: Araçların fiyatları, özellikleri ve kullanıcı yorumlarına erişim sağlanır.
+- **Blog ve İletişim**: Kullanıcılar, blog yazılarına yorum yapabilir ve iletişim formu aracılığıyla mesaj gönderebilir.
 
-### Project Structure
-| Layer                  | Description                                                               |
-|-----------------------|---------------------------------------------------------------------------|
-| CarBook.Domain        | Contains core entities and business logic.                               |
-| CarBook.Application    | Includes DTOs, enums, CQRS, Mediator, and repository design patterns.    |
-| CarBook.Persistence    | Implements repository classes and database operations.                    |
-| CarBook.WebApi        | Hosts API methods to facilitate communication with the outside world.    |
-| CarBook.Dto           | Provides DTO structures that align with the frontend.                    |
-| CarBook.WebUI         | User interface designed with MVC; includes a separate area for the admin panel. |
+## Proje Yapısı
+| Katman | Açıklama |
+|--------|------------|
+| **CarBook.Domain** | Çekirdek varlıkları (entities) ve iş mantığını içerir. |
+| **CarBook.Application** | DTO'lar, enums, CQRS, Mediator ve Repository tasarım desenlerini barındırır. |
+| **CarBook.Persistence** | Repository sınıflarını ve veritabanı işlemlerini uygular. |
+| **CarBook.WebApi** | Dış dünya ile iletişim sağlamak için API metodlarını barındırır. |
+| **CarBook.Dto** | Ön yüz ile uyumlu DTO yapılarını içerir. |
+| **CarBook.WebUI** | MVC ile tasarlanmış kullanıcı arayüzünü içerir; ayrıca yönetici paneli için ayrı bir alan bulunur. |
 
-### Technologies Used
+## Kullanılan Teknolojiler
 - **ASP.NET Core 8**
 - **Web API**
-- **Onion Architecture**
+- **Onion Architecture (Soğan Mimarisi)**
 - **CQRS Pattern**
 - **Mediator Pattern**
 - **Repository Pattern**
 - **MSSQL**
 - **Bootstrap**
-- **JWT**
+- **JWT (JSON Web Token)**
 - **SignalR**
 - **Fluent Validation**
-- **HTML/CSS/JavaScript**
+- **HTML / CSS / JavaScript**
+
+
 

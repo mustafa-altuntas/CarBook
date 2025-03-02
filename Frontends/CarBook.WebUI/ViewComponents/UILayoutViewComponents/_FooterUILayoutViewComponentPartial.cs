@@ -33,7 +33,7 @@ namespace CarBook.WebUI.ViewComponents.UILayoutViewComponents
             }
             var jsonData1 = await resutlMessageFooter.Content.ReadAsStringAsync();
             var footerAddresss = JsonConvert.DeserializeObject<List<ResultFooterAddresDto>>(jsonData1);
-            footerAddress = footerAddresss.First();
+            footerAddress = footerAddresss.FirstOrDefault();
 
             var resutlMessageSocial = await client.GetAsync("https://localhost:7112/api/SocialMedia");
             if (!resutlMessageSocial.IsSuccessStatusCode)

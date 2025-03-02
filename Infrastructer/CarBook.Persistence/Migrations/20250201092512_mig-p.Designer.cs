@@ -3,17 +3,17 @@ using System;
 using CarBook.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace CarBook.Persistence.Migrations
 {
     [DbContext(typeof(CarBookContext))]
-    [Migration("20241106091143_mig_add_location_reservation_relation")]
-    partial class mig_add_location_reservation_relation
+    [Migration("20250201092512_mig-p")]
+    partial class migp
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,54 +21,109 @@ namespace CarBook.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.8")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("CarBook.Domain.About", b =>
                 {
                     b.Property<int>("AboutId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboutId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AboutId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("AboutId");
 
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("CarBook.Domain.AppRole", b =>
+                {
+                    b.Property<int>("AppRoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AppRoleId"));
+
+                    b.Property<string>("AppRoleName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("AppRoleId");
+
+                    b.ToTable("AppRoles");
+                });
+
+            modelBuilder.Entity("CarBook.Domain.AppUser", b =>
+                {
+                    b.Property<int>("AppUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AppUserId"));
+
+                    b.Property<int>("AppRoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("AppUserId");
+
+                    b.HasIndex("AppRoleId");
+
+                    b.ToTable("AppUsers");
+                });
+
             modelBuilder.Entity("CarBook.Domain.Author", b =>
                 {
                     b.Property<int>("AuthorID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuthorID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AuthorID"));
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("AuthorID");
 
@@ -79,25 +134,25 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("BannerId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BannerId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BannerId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("VideoDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("VideoUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("BannerId");
 
@@ -108,30 +163,30 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("BlogID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BlogID"));
 
                     b.Property<int>("AuthorID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("CategoryID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("CoverImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("BlogID");
 
@@ -146,13 +201,13 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("BrandId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrandId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BrandId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("BrandId");
 
@@ -163,41 +218,41 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("CarId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CarId"));
 
                     b.Property<string>("BigImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("CoverImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Fuel")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("Km")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Luggage")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<byte>("Seat")
-                        .HasColumnType("tinyint");
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Transmission")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("CarId");
 
@@ -210,16 +265,16 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("CarDescriptionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarDescriptionId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CarDescriptionId"));
 
                     b.Property<int>("CarId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Detail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("CarDescriptionId");
 
@@ -232,18 +287,18 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("CarFeatureId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarFeatureId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CarFeatureId"));
 
                     b.Property<bool>("Available")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<int>("CarId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("FeatureId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("CarFeatureId");
 
@@ -258,18 +313,18 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("CarPricingId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarPricingId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CarPricingId"));
 
                     b.Property<double>("Amount")
-                        .HasColumnType("float");
+                        .HasColumnType("double precision");
 
                     b.Property<int>("CarId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("PricingId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("CarPricingId");
 
@@ -284,13 +339,13 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("CategoryId");
 
@@ -301,23 +356,27 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("CommentID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CommentID"));
 
                     b.Property<int>("BlogID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("CommentID");
 
@@ -330,28 +389,28 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ContactId"));
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("SendDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Subject")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ContactId");
 
@@ -362,21 +421,21 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("CustomerID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CustomerID"));
 
                     b.Property<string>("CustomerMail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CustomerSurname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("CustomerID");
 
@@ -387,13 +446,13 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("FeatureId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeatureId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FeatureId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("FeatureId");
 
@@ -404,25 +463,25 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("FooterAddressId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FooterAddressId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FooterAddressId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("FooterAddressId");
 
@@ -433,13 +492,13 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("LocationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocationId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LocationId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("LocationId");
 
@@ -453,13 +512,13 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("PricingId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PricingId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PricingId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("PricingId");
 
@@ -470,18 +529,18 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("RentACarId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentACarId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RentACarId"));
 
                     b.Property<bool>("Available")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<int>("CarId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("LocationId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("RentACarId");
 
@@ -496,44 +555,44 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("RentACarProcessID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RentACarProcessID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RentACarProcessID"));
 
                     b.Property<int>("CarID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("CustomerID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("DropOffDate")
                         .HasColumnType("Date");
 
                     b.Property<string>("DropOffDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("DropOffLocation")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<TimeSpan>("DropOffTime")
-                        .HasColumnType("time");
+                        .HasColumnType("interval");
 
                     b.Property<DateTime>("PickUpDate")
                         .HasColumnType("Date");
 
                     b.Property<string>("PickUpDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("PickUpLocation")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<TimeSpan>("PickUpTime")
-                        .HasColumnType("time");
+                        .HasColumnType("interval");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("numeric");
 
                     b.HasKey("RentACarProcessID");
 
@@ -548,45 +607,50 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("ReservationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ReservationId"));
 
                     b.Property<int>("Age")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("CarId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("DriverLicenseYear")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("DropOffLocationId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("PickUpLocationId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ReservationId");
+
+                    b.HasIndex("CarId");
 
                     b.HasIndex("DropOffLocationId");
 
@@ -595,25 +659,61 @@ namespace CarBook.Persistence.Migrations
                     b.ToTable("Reservations");
                 });
 
+            modelBuilder.Entity("CarBook.Domain.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ReviewId"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerImage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RaytingValue")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("CarBook.Domain.Service", b =>
                 {
                     b.Property<int>("ServiceID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ServiceID"));
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("IconUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("ServiceID");
 
@@ -624,21 +724,21 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("SocialMediaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SocialMediaId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SocialMediaId"));
 
                     b.Property<string>("Icon")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("SocialMediaId");
 
@@ -649,13 +749,13 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("TagCloudID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagCloudID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagCloudID"));
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("TagCloudID");
 
@@ -666,15 +766,15 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("TagCloudBlogID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagCloudBlogID"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagCloudBlogID"));
 
                     b.Property<int>("BlogID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("TagCloudID")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("TagCloudBlogID");
 
@@ -689,29 +789,40 @@ namespace CarBook.Persistence.Migrations
                 {
                     b.Property<int>("TestimonialId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TestimonialId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TestimonialId"));
 
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("TestimonialId");
 
                     b.ToTable("Testimonials");
+                });
+
+            modelBuilder.Entity("CarBook.Domain.AppUser", b =>
+                {
+                    b.HasOne("CarBook.Domain.AppRole", "AppRole")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("AppRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppRole");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Blog", b =>
@@ -844,6 +955,12 @@ namespace CarBook.Persistence.Migrations
 
             modelBuilder.Entity("CarBook.Domain.Reservation", b =>
                 {
+                    b.HasOne("CarBook.Domain.Car", "Car")
+                        .WithMany("Reservations")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CarBook.Domain.Location", "DropOffLocation")
                         .WithMany("DropOffReservations")
                         .HasForeignKey("DropOffLocationId")
@@ -854,9 +971,22 @@ namespace CarBook.Persistence.Migrations
                         .HasForeignKey("PickUpLocationId")
                         .IsRequired();
 
+                    b.Navigation("Car");
+
                     b.Navigation("DropOffLocation");
 
                     b.Navigation("PickUpLocation");
+                });
+
+            modelBuilder.Entity("CarBook.Domain.Review", b =>
+                {
+                    b.HasOne("CarBook.Domain.Car", "Car")
+                        .WithMany("Reviews")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("CarBook.Domain.TagCloudBlog", b =>
@@ -876,6 +1006,11 @@ namespace CarBook.Persistence.Migrations
                     b.Navigation("Blog");
 
                     b.Navigation("TagCloud");
+                });
+
+            modelBuilder.Entity("CarBook.Domain.AppRole", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Author", b =>
@@ -906,6 +1041,10 @@ namespace CarBook.Persistence.Migrations
                     b.Navigation("RentACarProcesses");
 
                     b.Navigation("RentACars");
+
+                    b.Navigation("Reservations");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("CarBook.Domain.Category", b =>
