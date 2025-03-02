@@ -9,6 +9,7 @@ namespace CarBook.Persistence.Context
         {
         }
 
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseSqlServer("Data Source=DESKTOP-EL2OSRJ\\SQLEXPRESS;Initial Catalog=CarBookDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");

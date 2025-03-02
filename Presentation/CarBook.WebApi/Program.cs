@@ -174,6 +174,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseSeedData();
+
 
 app.UseCors("CarbookCorsPolicy");
 

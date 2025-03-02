@@ -1,9 +1,8 @@
-﻿using Carbook.DTO.ReservationDtos;
+﻿using System.Text;
+using Carbook.DTO.ReservationDtos;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
